@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import * as React from "react";
 import { Test } from "components/Test";
 import { observer } from "mobx-react-lite";
-import { Store } from "./store/Store";
-
-const store = new Store("foo");
+import { store } from "./store/Store";
 
 export const App = observer(() => {
-    useEffect(() => {
+    React.useEffect(() => {
         setTimeout(() => {
             store.changeTest();
         }, 5000);

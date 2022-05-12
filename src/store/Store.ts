@@ -1,15 +1,15 @@
 import { makeAutoObservable } from "mobx";
 
-export class Store {
-    public name = "";
+class Store {
+    public name = "foo";
 
-    public constructor(name: string) {
+    public constructor() {
         makeAutoObservable(this);
-
-        this.name = name;
     }
 
     public changeTest(): void {
         this.name = "bar";
     }
 }
+
+export const store = new Store();

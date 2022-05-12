@@ -100,6 +100,7 @@
   },
   "include": [
     "**/src",
+    "**/__mocks__",
     "**/jest.config.js",
     "**/.eslintrc.js",
     "**/webpack.config.js"
