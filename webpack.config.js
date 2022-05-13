@@ -16,7 +16,6 @@ const config = {
         clean: true,
         path: path.resolve(__dirname, "dist"),
         filename: "static/[name].[contenthash].js",
-        publicPath: "/",
     },
     devServer: {
         open: true,
@@ -68,7 +67,6 @@ const config = {
             new CssMinimizerPlugin(),
         ],
         runtimeChunk: "single",
-        moduleIds: "deterministic",
         splitChunks: {
             cacheGroups: {
                 vendor: {
