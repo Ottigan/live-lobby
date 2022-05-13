@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-class Store {
+export class Store {
     public name = "foo";
 
     public constructor() {

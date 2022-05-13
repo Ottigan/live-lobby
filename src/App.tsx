@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Test } from "components/Test";
 import { observer } from "mobx-react-lite";
+import { StoreContext } from "store/useStore";
 import { store } from "./store/Store";
 
 export const App = observer(() => {
@@ -11,8 +12,8 @@ export const App = observer(() => {
     }, []);
 
     return (
-        <div>
-            <Test text={store.name} />
-        </div>
+        <StoreContext.Provider value={store}>
+            <Test />
+        </StoreContext.Provider>
     );
 });
