@@ -7,7 +7,6 @@ module.exports = {
         "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js",
         "^components(.*)$": "<rootDir>/src/components/$1",
         "^utils(.*)$": "<rootDir>/src/utils/$1",
-        "^layouts(.*)$": "<rootDir>/src/layouts/$1",
         "^views(.*)$": "<rootDir>/src/views/$1",
     },
     setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],

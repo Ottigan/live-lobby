@@ -1,19 +1,18 @@
 import * as React from "react";
-import { Test } from "components/Test";
 import { observer } from "mobx-react-lite";
 import { StoreContext } from "store/useStore";
+import { Navbar } from "components/Navbar";
+import { Roulette } from "views/Roulette";
 import { store } from "./store/Store";
+import styles from "./styles.module.scss";
 
 export const App = observer(() => {
-    React.useEffect(() => {
-        setTimeout(() => {
-            store.changeTest();
-        }, 5000);
-    }, []);
-
     return (
         <StoreContext.Provider value={store}>
-            <Test />
+            <div className={`${styles.App}`}>
+                <Navbar className={`${styles.Header}`} />
+                <Roulette className={`${styles.View}`} />
+            </div>
         </StoreContext.Provider>
     );
 });

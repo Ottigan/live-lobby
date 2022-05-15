@@ -1,0 +1,38 @@
+.Game {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 11rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  background-image: url(../../assets/colorful-game-bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.BetLimits {
+  position: absolute;
+  border-radius: 0.5rem;
+  height: 1.5rem;
+  width: 3rem;
+  top: 0.5rem;
+  left: 0.5rem;
+  line-height: 1.5rem;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: goldenrod;
+}
+
+.Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.5rem;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 0 0.8rem;
+  background-color: rgba(0, 0, 0, 0.7);
+}

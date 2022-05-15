@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  color: white;
+
+  --navbar-height: 8rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Header {
+  height: var(--navbar-height);
+  background-color: darkslategray;
+  line-height: var(--navbar-height);
+  font-size: 4rem;
+}
+
+.View {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(6, 1fr);
+  height: calc(100vh - var(--navbar-height));
+  padding: 2rem;
+  background-color: rgb(62, 62, 83);
+}
