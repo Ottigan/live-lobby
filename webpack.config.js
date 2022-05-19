@@ -56,6 +56,10 @@ const config = {
             views: path.resolve(__dirname, "src/views"),
             store: path.resolve(__dirname, "src/store"),
             assets: path.resolve(__dirname, "src/assets"),
+            modules: path.resolve(__dirname, "src/modules"),
+            hooks: path.resolve(__dirname, "src/hooks"),
+            services: path.resolve(__dirname, "src/services"),
+            db: path.resolve(__dirname, "src/db"),
         },
     },
     optimization: {

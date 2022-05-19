@@ -1,18 +1,33 @@
 import * as React from "react";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Navigate,
+} from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { StoreContext } from "store/useStore";
+import { RootStoreContext } from "hooks/useStore";
 import { Navbar } from "components/Navbar";
-import { Roulette } from "views/Roulette";
-import { store } from "./store/Store";
+import { ObRoulettes } from "modules/ObRoulettes";
+import { ObBlackjacks } from "modules/ObBlackjacks";
+import { store } from "./stores/RootStore";
 import styles from "./styles.module.scss";
 
 export const App = observer(() => {
+    const { categories } = store;
+
     return (
-        <StoreContext.Provider value={store}>
-            <div className={`${styles.App}`}>
-                <Navbar className={`${styles.Header}`} />
-                <Roulette className={`${styles.View}`} />
-            </div>
-        </StoreContext.Provider>
+        <RootStoreContext.Provider value={store}>
+            <BrowserRouter basename="">
+                <main className={`${styles.App}`}>
+                    <Navbar className={`${styles.Header}`} categories={categories} />
+                    <Routes>
+                        <Route path="/roulette" element={<ObRoulettes className={`${styles.View}`} />} />
+                        <Route path="/blackjack" element={<ObBlackjacks className={`${styles.View}`} />} />
+                        <Route path="/*" element={<Navigate to="/roulette" replace={true} />} />
+                    </Routes>
+                </main>
+            </BrowserRouter>
+        </RootStoreContext.Provider>
     );
 });

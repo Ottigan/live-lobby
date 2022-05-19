@@ -1,37 +1,41 @@
-import { makeAutoObservable } from "mobx";
+const MAX_BLACKJACK_PLAYERS = 7;
 
-export class Store {
-    public games: Game[] = [
+class Db {
+    public games = [
         {
             name: "Test",
+            type: "roulette",
             players: 54,
             betLimits: {
                 currency: "€",
-                min: 5,
+                min: 1,
                 max: 20,
             },
         },
         {
             name: "Foo",
+            type: "roulette",
             players: 678,
             betLimits: {
                 currency: "€",
-                min: 5,
+                min: 1,
                 max: 20,
             },
         },
         {
             name: "Bar",
+            type: "roulette",
             players: 43,
             betLimits: {
                 currency: "€",
-                min: 5,
+                min: 0.50,
                 max: 20,
             },
         },
         {
             name: "Fizz",
-            players: 13,
+            type: "blackjack",
+            players: 3,
             betLimits: {
                 currency: "€",
                 min: 5,
@@ -40,38 +44,44 @@ export class Store {
         },
         {
             name: "Buzz",
+            type: "blackjack",
             players: 5,
             betLimits: {
                 currency: "€",
-                min: 5,
+                min: 15,
                 max: 20,
             },
         },
         {
             name: "Omicron",
+            type: "roulette",
             players: 29,
             betLimits: {
                 currency: "€",
-                min: 5,
+                min: 1,
                 max: 20,
             },
         },
     ];
 
     public constructor() {
-        makeAutoObservable(this);
-
         setInterval(() => this.updatePlayers(), 3000);
     }
 
-    protected updatePlayers(): void {
-        this.games.forEach((game, i) => {
-            const { players } = game;
+    public async find(descriptor: OmitMethodNames<Db>) {
+        return Promise.resolve(this[descriptor]);
+    }
 
-            const changes = Math.floor(Math.random() * 10);
+    private updatePlayers(): void {
+        this.games.forEach((game, i) => {
+            const { type, players } = game;
+
+            const changes = Math.round(Math.random() * 10);
 
             if (Math.random() > 0.5) {
-                this.games[i].players = players + changes;
+                const sum = players + changes;
+
+                this.games[i].players = type === "blackjack" && sum > MAX_BLACKJACK_PLAYERS ? MAX_BLACKJACK_PLAYERS : sum;
             } else {
                 this.games[i].players = changes > players ? 0 : players - changes;
             }
@@ -79,4 +89,4 @@ export class Store {
     }
 }
 
-export const store = new Store();
+export const Database = new Db();

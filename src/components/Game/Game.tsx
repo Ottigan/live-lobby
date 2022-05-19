@@ -1,16 +1,23 @@
-import React from "react";
-import { observer } from "mobx-react-lite";
+import React, { useEffect, useRef } from "react";
 import styles from "./styles.module.scss";
 
 interface GameProps {
     game: Game;
+    image: string;
 }
 
-export const Game: React.FC<GameProps> = observer((props) => {
-    const { game } = props;
+export const Game: React.FC<GameProps> = (props) => {
+    const { game, image } = props;
+    const myGame = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (myGame.current) {
+            myGame.current.style.backgroundImage = `url(${image})`;
+        }
+    }, [image]);
 
     return (
-        <div className={`${styles.Game}`}>
+        <div ref={myGame} className={`${styles.Game}`}>
             <span className={`${styles.BetLimits}`}>{`${game.betLimits.currency} ${game.betLimits.min}`}</span>
             <footer className={`${styles.Footer}`}>
                 <span>{game.name}</span>
@@ -18,4 +25,4 @@ export const Game: React.FC<GameProps> = observer((props) => {
             </footer>
         </div>
     );
-});
+};

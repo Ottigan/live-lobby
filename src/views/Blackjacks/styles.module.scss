@@ -1,0 +1,6 @@
+.Blackjacks {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(6, 1fr);
+  background-color: rgb(51, 36, 36);
+}
