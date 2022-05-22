@@ -1,0 +1,31 @@
+.GridWidget {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0 0.5rem;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin: 0.5rem;
+    cursor: pointer;
+
+    &:global(.active) svg {
+      fill: rgba(255, 255, 255, 0.8);
+    }
+
+    &:hover svg {
+      fill: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  svg {
+    pointer-events: none;
+    height: 100%;
+    width: auto;
+    fill: rgba(0, 0, 0, 0.6);
+  }
+}
