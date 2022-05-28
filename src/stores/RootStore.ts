@@ -1,18 +1,20 @@
 import { makeAutoObservable } from "mobx";
 import { UiStore } from "./UiStore";
-import { LobbyStore } from "./LobbyStore";
+import { CategoriesStore } from "./CategoriesStore";
+import { GameStore } from "./GamesStore";
+import { WidgetsStore } from "./WidgetsStore";
 
 export class RootStore {
-    public lobbyStore;
+    public categoriesStore;
+    public gamesStore;
+    public widgetsStore;
     public uiStore;
-    public categories = [
-        { name: "Roulettes", path: "roulette" },
-        { name: "Blackjacks", path: "blackjack" },
-    ];
 
     public constructor() {
         makeAutoObservable(this);
-        this.lobbyStore = new LobbyStore(this);
+        this.categoriesStore = new CategoriesStore(this);
+        this.gamesStore = new GameStore(this);
+        this.widgetsStore = new WidgetsStore(this);
         this.uiStore = new UiStore(this);
     }
 }

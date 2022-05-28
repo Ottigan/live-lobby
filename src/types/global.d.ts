@@ -19,6 +19,7 @@ const enum GameType {
 }
 
 interface Game {
+    id: number;
     name: string;
     players: number;
     type: GameType;
@@ -27,9 +28,26 @@ interface Game {
         min: number;
         max: number;
     };
+    online: boolean;
+    description: string;
+    bgImage: string;
 }
 
 interface Category {
     name: string;
     path: string;
+    descriptor: string;
+    gameIds: number[];
+    bgColor: string;
+}
+
+interface WidgetOption {
+    size: number;
+    title: string;
+    image: string;
+}
+
+interface Widget {
+    name: string;
+    options?: WidgetOption[];
 }

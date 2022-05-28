@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import cn from "classnames";
 import styles from "./styles.module.scss";
 
 interface NavbarProps {
@@ -9,13 +10,17 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ categories, className }) => {
     return (
-        <nav className={`${styles.Navbar} ${className}`}>
+        <nav className={cn(styles.Navbar, className)}>
             <ul>
-                {categories.map((category) => (
-                    <li key={category.name}>
-                        <NavLink to={category.path}>{category.name}</NavLink>
-                    </li>
-                ))}
+                {categories.map((category) => {
+                    const { path, name } = category;
+
+                    return (
+                        <li key={name}>
+                            <NavLink to={path}>{name}</NavLink>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );

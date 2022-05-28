@@ -1,37 +1,74 @@
+$footer-height: 2.5rem;
+
 .Game {
   position: relative;
+  aspect-ratio: 4/3;
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
   font-weight: 600;
   background-color: black;
+  overflow: hidden;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:not(:global(.offline)):hover {
+    :global(.image) {
+      transform: scale(1.2);
+    }
+
+    :global(.max-limits) {
+      display: inline-block;
+    }
+  }
+}
+
+.Avatar {
+  height: 100%;
+  width: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  overflow: hidden;
-  cursor: pointer;
+  transition: transform 0.3s ease-in 0.1s;
+
+  :global(.overlay) {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    height: calc(100% - $footer-height);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
 }
 
 .BetLimits {
   position: absolute;
-  border-radius: 0.5rem;
-  height: 1.5rem;
-  width: 3rem;
   top: 0.5rem;
   left: 0.5rem;
+  height: 1.5rem;
+  width: max-content;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
   line-height: 1.5rem;
   font-size: 0.9rem;
   background-color: rgba(0, 0, 0, 0.6);
   color: goldenrod;
+
+  :global(.max-limits) {
+    display: none;
+  }
 }
 
 .Footer {
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 2.5rem;
+  height: $footer-height;
+  width: 100%;
   margin-top: auto;
   margin-bottom: 0;
   padding: 0 0.8rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
 }

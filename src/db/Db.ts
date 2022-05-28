@@ -1,8 +1,15 @@
+import blackjackBg from "assets/blackjack-bg.jpg";
+import rouletteBg from "assets/roulette-bg.jpg";
+import largeGrid from "assets/large-grid.svg";
+import mediumGrid from "assets/medium-grid.svg";
+import smallGrid from "assets/small-grid.svg";
+
 const MAX_BLACKJACK_PLAYERS = 7;
 
 class Db {
     public games = [
         {
+            id: 1,
             name: "Test",
             type: "roulette",
             players: 54,
@@ -11,8 +18,12 @@ class Db {
                 min: 1,
                 max: 20,
             },
+            online: false,
+            description: "",
+            bgImage: rouletteBg as string,
         },
         {
+            id: 2,
             name: "Foo",
             type: "roulette",
             players: 678,
@@ -21,18 +32,26 @@ class Db {
                 min: 1,
                 max: 20,
             },
+            online: true,
+            description: "",
+            bgImage: rouletteBg as string,
         },
         {
+            id: 3,
             name: "Bar",
             type: "roulette",
             players: 43,
             betLimits: {
                 currency: "€",
-                min: 0.50,
+                min: 0.5,
                 max: 20,
             },
+            online: true,
+            description: "",
+            bgImage: rouletteBg as string,
         },
         {
+            id: 4,
             name: "Fizz",
             type: "blackjack",
             players: 3,
@@ -41,8 +60,12 @@ class Db {
                 min: 5,
                 max: 20,
             },
+            online: true,
+            description: "",
+            bgImage: blackjackBg as string,
         },
         {
+            id: 5,
             name: "Buzz",
             type: "blackjack",
             players: 5,
@@ -51,8 +74,12 @@ class Db {
                 min: 15,
                 max: 20,
             },
+            online: false,
+            description: "",
+            bgImage: blackjackBg as string,
         },
         {
+            id: 6,
             name: "Omicron",
             type: "roulette",
             players: 29,
@@ -61,15 +88,62 @@ class Db {
                 min: 1,
                 max: 20,
             },
+            online: false,
+            description: "",
+            bgImage: rouletteBg as string,
         },
     ];
+
+    public categories = [
+        {
+            name: "Blackjacks",
+            path: "blackjack",
+            descriptor: "blackjack",
+            gameIds: [4, 5],
+            bgColor: "#332424",
+        },
+        {
+            name: "Roulettes",
+            path: "roulette",
+            descriptor: "roulette",
+            gameIds: [1, 2, 3, 6],
+            bgColor: "#3e3e53",
+        },
+    ];
+
+    public widgets = {
+        gridWidget: {
+            name: "gridWidget",
+            options: [
+                {
+                    size: 5,
+                    title: "Large grid",
+                    image: largeGrid as string,
+
+                },
+                {
+                    size: 6,
+                    title: "Medium grid",
+                    image: mediumGrid as string,
+                },
+                {
+                    size: 8,
+                    title: "Small grid",
+                    image: smallGrid as string,
+                },
+            ],
+        },
+    };
 
     public constructor() {
         setInterval(() => this.updatePlayers(), 3000);
     }
 
-    public async find(descriptor: OmitMethodNames<Db>) {
-        return Promise.resolve(this[descriptor]);
+    // Simulating async query
+    public async find(descriptor: OmitMethodNames<Db>): Promise<unknown> {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(this[descriptor]), Math.random() * 1000);
+        });
     }
 
     private updatePlayers(): void {
@@ -81,7 +155,10 @@ class Db {
             if (Math.random() > 0.5) {
                 const sum = players + changes;
 
-                this.games[i].players = type === "blackjack" && sum > MAX_BLACKJACK_PLAYERS ? MAX_BLACKJACK_PLAYERS : sum;
+                this.games[i].players =
+          type === "blackjack" && sum > MAX_BLACKJACK_PLAYERS
+              ? MAX_BLACKJACK_PLAYERS
+              : sum;
             } else {
                 this.games[i].players = changes > players ? 0 : players - changes;
             }
