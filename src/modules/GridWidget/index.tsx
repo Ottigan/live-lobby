@@ -11,9 +11,9 @@ export const GridWidget: React.FC<GridWidgetProps> = observer(({ options }) => {
     const { uiStore } = useStore();
 
     const onClick = useCallback((e: React.MouseEvent) => {
-        const value = (e.target as HTMLButtonElement).value;
+        const value = (e.target as HTMLButtonElement).value as GridSize;
 
-        uiStore.setViewColumns(value);
+        uiStore.setGridSize(value);
     }, [uiStore]);
 
     return (

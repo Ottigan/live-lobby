@@ -14,7 +14,6 @@ export class WidgetsStore {
         this.rootStore = rootStore;
 
         this.requestWidgets();
-        setInterval(() => this.requestWidgets(), 1000); // Fake realtime
     }
 
     public getWidgets(): Widget[] {
@@ -27,6 +26,9 @@ export class WidgetsStore {
                 this.isLoading = false;
                 this.widgets = widgets;
             }))
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                this.isLoading = false;
+            });
     }
 }

@@ -27,6 +27,9 @@ export class GameStore {
                 this.isLoading = false;
                 this.games = games;
             }))
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                this.isLoading = false;
+            });
     }
 }

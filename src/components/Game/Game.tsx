@@ -12,11 +12,11 @@ interface GameProps {
 
 export const Game: React.FC<GameProps> = (props) => {
     const { gameImageDivRef, game } = props;
-    const { betLimits, name, players, online } = game;
+    const { betLimits, name, players, online, opensAt } = game;
 
     return (
         <div className={cn(styles.Game, { offline: !online })}>
-            <Avatar gameImageDivRef={gameImageDivRef} online={online} />
+            <Avatar gameImageDivRef={gameImageDivRef} online={online} opensAt={opensAt} />
             <BetLimits {...betLimits} />
             <Footer name={name} players={players} online={online} />
         </div>

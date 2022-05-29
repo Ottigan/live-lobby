@@ -14,7 +14,6 @@ export class CategoriesStore {
         this.rootStore = rootStore;
 
         this.requestCategories();
-        setInterval(() => this.requestCategories(), 1000); // Fake realtime
     }
 
     private requestCategories(): void {
@@ -25,6 +24,9 @@ export class CategoriesStore {
                     this.categories = categories;
                 });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                this.isLoading = false;
+            });
     }
 }

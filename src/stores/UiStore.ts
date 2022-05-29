@@ -1,8 +1,8 @@
-import { makeAutoObservable, observable } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 import type { RootStore } from "./RootStore";
 
 export class UiStore {
-    public gridSize = "5";
+    public gridSize: GridSize = "md";
     public windowDimensions = {
         width: window.innerWidth,
         height: window.innerHeight,
@@ -14,22 +14,24 @@ export class UiStore {
         makeAutoObservable(this, { windowDimensions: observable.struct });
 
         window.onresize = (e) => {
-            this.windowDimensions = {
-                width: (e.target as Window).innerWidth,
-                height: (e.target as Window).innerHeight,
-            };
+            runInAction(() => {
+                this.windowDimensions = {
+                    width: (e.target as Window).innerWidth,
+                    height: (e.target as Window).innerHeight,
+                };
+            });
         };
 
         const gridSize = localStorage.getItem("gridSize");
 
-        if (gridSize) {
-            this.setViewColumns(gridSize);
+        if (gridSize && ["lg", "md", "sm"].includes(gridSize)) {
+            this.setGridSize((gridSize as GridSize));
         }
 
         this.rootStore = rootStore;
     }
 
-    public setViewColumns(value: string): void {
+    public setGridSize(value: GridSize): void {
         localStorage.setItem("gridSize", value);
         this.gridSize = value;
     }

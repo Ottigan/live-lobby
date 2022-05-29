@@ -1,12 +1,31 @@
 .Category {
-  --column-count: 6;
+  --grid-size: 'md';
+
+  // Desktop column count by size
+  --lg-desktop-columns: 5;
+  --md-desktop-columns: 6;
+  --sm-desktop-columns: 7;
+
+  // Laptop column count by size
+  --lg-laptop-columns: 3;
+  --md-laptop-columns: 4;
+  --sm-laptop-columns: 5;
+
+  // Tablet column count by size
+  --lg-tablet-columns: 2;
+  --md-tablet-columns: 3;
+  --sm-tablet-columns: 4;
+
+  --desktop-columns: var(--md-desktop-columns);
+  --laptop-columns: var(--md-laptop-columns);
+  --tablet-columns: var(--md-tablet-columns);
   --bg-color: #3e3e53;
   --desktop-gap: 1.2vw;
   --mobile-gap: 2vw;
 
   display: grid;
   gap: var(--desktop-gap);
-  grid-template-columns: repeat(var(--column-count), 1fr);
+  grid-template-columns: repeat(var(--desktop-columns), 1fr);
   grid-template-rows: auto 1fr;
   height: 100%;
   padding-top: calc(3rem + var(--desktop-gap));
@@ -15,12 +34,23 @@
   padding-left: var(--desktop-gap);
   background-color: var(--bg-color);
 
+  // Laptop
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(var(--laptop-columns), 1fr);
+  }
+
+  // Tablet
+  @media screen and (max-width: 800px) {
+    grid-template-columns: repeat(var(--tablet-columns), 1fr);
+  }
+
+  // Mobile
   @media screen and (max-width: 420px) {
-    gap: var(--mobile-gap);
+    grid-template-columns: repeat(2, 1fr);
     padding-top: calc(3rem + var(--mobile-gap));
     padding-right: var(--mobile-gap);
+    gap: var(--mobile-gap);
     padding-bottom: 3rem;
     padding-left: var(--mobile-gap);
-    grid-template-columns: repeat(2, 1fr);
   }
 }

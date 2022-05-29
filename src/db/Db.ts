@@ -19,6 +19,7 @@ class Db {
                 max: 20,
             },
             online: false,
+            opensAt: "2022-05-29T16:00:00.000Z",
             description: "",
             bgImage: rouletteBg as string,
         },
@@ -75,6 +76,7 @@ class Db {
                 max: 20,
             },
             online: false,
+            opensAt: "2022-05-29T15:00:00.000Z",
             description: "",
             bgImage: blackjackBg as string,
         },
@@ -89,6 +91,7 @@ class Db {
                 max: 20,
             },
             online: false,
+            opensAt: "2022-05-29T18:00:00.000Z",
             description: "",
             bgImage: rouletteBg as string,
         },
@@ -116,18 +119,18 @@ class Db {
             name: "gridWidget",
             options: [
                 {
-                    size: 5,
+                    size: "lg",
                     title: "Large grid",
                     image: largeGrid as string,
 
                 },
                 {
-                    size: 6,
+                    size: "md",
                     title: "Medium grid",
                     image: mediumGrid as string,
                 },
                 {
-                    size: 8,
+                    size: "sm",
                     title: "Small grid",
                     image: smallGrid as string,
                 },

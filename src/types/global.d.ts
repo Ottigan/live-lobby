@@ -29,6 +29,7 @@ interface Game {
         max: number;
     };
     online: boolean;
+    opensAt: string;
     description: string;
     bgImage: string;
 }
@@ -41,8 +42,10 @@ interface Category {
     bgColor: string;
 }
 
+type GridSize = "lg" | "md" | "sm";
+
 interface WidgetOption {
-    size: number;
+    size: GridSize;
     title: string;
     image: string;
 }
