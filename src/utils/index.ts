@@ -15,7 +15,9 @@ export function isGame(data: unknown): data is Game {
     && hasKey("betLimits", data) && !!data.betLimits && typeof data.betLimits === "object"
     && hasKey("min", data.betLimits) && typeof data.betLimits.min === "number"
     && hasKey("max", data.betLimits) && typeof data.betLimits.max === "number"
-    && hasKey("currency", data.betLimits) && typeof data.betLimits.currency === "string";
+    && hasKey("currency", data.betLimits) && typeof data.betLimits.currency === "string"
+    && (!hasKey("history", data)
+        || (data.type === "roulette" && Array.isArray(data.history) && data.history.every((x) => x >= 0 || x <= 36)));
 }
 
 export function isCategory(data: unknown): data is Category {

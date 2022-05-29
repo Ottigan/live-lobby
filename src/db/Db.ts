@@ -19,9 +19,10 @@ class Db {
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-29T16:00:00.000Z",
+            opensAt: "2022-05-30T16:00:00.000Z",
             description: "",
             bgImage: rouletteBg as string,
+            history: [],
         },
         {
             id: 2,
@@ -36,6 +37,7 @@ class Db {
             online: true,
             description: "",
             bgImage: rouletteBg as string,
+            history: [0, 0, 10, 5, 33, 12, 18, 10, 5, 5],
         },
         {
             id: 3,
@@ -50,6 +52,7 @@ class Db {
             online: true,
             description: "",
             bgImage: rouletteBg as string,
+            history: [0, 0, 10, 5, 33, 12, 18, 10, 5, 5],
         },
         {
             id: 4,
@@ -76,7 +79,7 @@ class Db {
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-29T15:00:00.000Z",
+            opensAt: "2022-05-30T15:00:00.000Z",
             description: "",
             bgImage: blackjackBg as string,
         },
@@ -91,9 +94,10 @@ class Db {
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-29T18:00:00.000Z",
+            opensAt: "2022-05-30T18:00:00.000Z",
             description: "",
             bgImage: rouletteBg as string,
+            history: [],
         },
     ];
 

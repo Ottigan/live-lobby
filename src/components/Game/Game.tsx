@@ -4,6 +4,7 @@ import Avatar from "./components/Avatar";
 import { BetLimits } from "./components/BetLimits";
 import Footer from "./components/Footer";
 import styles from "./styles.module.scss";
+import { History } from "./components/History";
 
 interface GameProps {
     gameImageDivRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -18,6 +19,7 @@ export const Game: React.FC<GameProps> = (props) => {
         <div className={cn(styles.Game, { offline: !online })}>
             <Avatar gameImageDivRef={gameImageDivRef} online={online} opensAt={opensAt} />
             <BetLimits {...betLimits} />
+            <History game={game} />
             <Footer name={name} players={players} online={online} />
         </div>
     );

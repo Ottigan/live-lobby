@@ -1,20 +1,18 @@
 .Category {
-  --grid-size: 'md';
-
   // Desktop column count by size
   --lg-desktop-columns: 5;
   --md-desktop-columns: 6;
   --sm-desktop-columns: 7;
 
   // Laptop column count by size
-  --lg-laptop-columns: 3;
-  --md-laptop-columns: 4;
-  --sm-laptop-columns: 5;
+  --lg-laptop-columns: 4;
+  --md-laptop-columns: 5;
+  --sm-laptop-columns: 6;
 
   // Tablet column count by size
-  --lg-tablet-columns: 2;
-  --md-tablet-columns: 3;
-  --sm-tablet-columns: 4;
+  --lg-tablet-columns: 3;
+  --md-tablet-columns: 4;
+  --sm-tablet-columns: 5;
 
   --desktop-columns: var(--md-desktop-columns);
   --laptop-columns: var(--md-laptop-columns);
