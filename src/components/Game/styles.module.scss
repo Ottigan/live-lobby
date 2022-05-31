@@ -1,7 +1,10 @@
+@use 'styles/mixins';
+
 .Game {
-  --lg-font-size: calc((6vw + 3.5rem) / 7);
-  --md-font-size: calc((7vw + 2rem) / 7);
+  --mobile-font-size: calc((7vw + 4.5rem) / 7);
   --sm-font-size: calc((5vw + 2rem) / 8);
+  --md-font-size: calc((7vw + 2rem) / 7);
+  --lg-font-size: calc((6vw + 3.5rem) / 7);
 
   --game-font-size: var(--md-font-size);
   --footer-height: 18%;
@@ -11,14 +14,14 @@
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
-  font-weight: 600;
   background-color: black;
   overflow: hidden;
   cursor: pointer;
-  font-size: var(--game-font-size);
+  font-weight: 600;
+  font-size: var(--mobile-font-size);
 
-  @media screen and (max-width: 420px) {
-    font-size: calc((7vw + 4.5rem) / 7);
+  @include mixins.for-tablet-up {
+    font-size: var(--game-font-size);
   }
 
   &:not(:global(.offline)):hover {

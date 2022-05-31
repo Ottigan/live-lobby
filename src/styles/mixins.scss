@@ -1,0 +1,20 @@
+// Tablet
+@mixin for-tablet-up {
+  @media screen and (min-width: 420px) {
+    @content;
+  }
+}
+
+// Laptop
+@mixin for-laptop-up {
+  @media screen and (min-width: 800px) {
+    @content;
+  }
+}
+
+// Desktop
+@mixin for-desktop-up {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}

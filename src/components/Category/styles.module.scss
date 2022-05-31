@@ -1,57 +1,55 @@
 @use 'styles/variables';
+@use 'styles/mixins';
 
 .Category {
-  // Desktop column count by size
-  --lg-desktop-columns: 5;
-  --md-desktop-columns: 6;
-  --sm-desktop-columns: 7;
+  // Tablet column count by size
+  --lg-tablet-columns: 3;
+  --md-tablet-columns: 4;
+  --sm-tablet-columns: 5;
 
   // Laptop column count by size
   --lg-laptop-columns: 4;
   --md-laptop-columns: 5;
   --sm-laptop-columns: 6;
 
-  // Tablet column count by size
-  --lg-tablet-columns: 3;
-  --md-tablet-columns: 4;
-  --sm-tablet-columns: 5;
+  // Desktop column count by size
+  --lg-desktop-columns: 5;
+  --md-desktop-columns: 6;
+  --sm-desktop-columns: 7;
 
-  --desktop-columns: var(--md-desktop-columns);
-  --laptop-columns: var(--md-laptop-columns);
   --tablet-columns: var(--md-tablet-columns);
+  --laptop-columns: var(--md-laptop-columns);
+  --desktop-columns: var(--md-desktop-columns);
   --bg-color: #3e3e53;
   --desktop-gap: 1.2vw;
   --mobile-gap: 2vw;
 
   display: grid;
-  gap: var(--desktop-gap);
-  grid-template-columns: repeat(var(--desktop-columns), 1fr);
+  gap: var(--mobile-gap);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto 1fr;
   height: calc(100vh - variables.$header-height);
   width: 100%;
-  padding-top: calc(variables.$widgets-height + var(--desktop-gap));
-  padding-right: var(--desktop-gap);
-  padding-bottom: var(--desktop-gap);
-  padding-left: var(--desktop-gap);
+  padding-top: calc(variables.$widgets-height + var(--mobile-gap));
+  padding-right: var(--mobile-gap);
+  padding-bottom: var(--mobile-gap);
+  padding-left: var(--mobile-gap);
   background-color: var(--bg-color);
 
-  // Laptop
-  @media screen and (max-width: 1200px) {
+  @include mixins.for-tablet-up {
+    gap: var(--desktop-gap);
+    grid-template-columns: repeat(var(--tablet-columns), 1fr);
+    padding-top: calc(variables.$widgets-height + var(--desktop-gap));
+    padding-right: var(--desktop-gap);
+    padding-bottom: var(--desktop-gap);
+    padding-left: var(--desktop-gap);
+  }
+
+  @include mixins.for-laptop-up {
     grid-template-columns: repeat(var(--laptop-columns), 1fr);
   }
 
-  // Tablet
-  @media screen and (max-width: 800px) {
-    grid-template-columns: repeat(var(--tablet-columns), 1fr);
-  }
-
-  // Mobile
-  @media screen and (max-width: 420px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--mobile-gap);
-    padding-top: calc(variables.$widgets-height + var(--mobile-gap));
-    padding-right: var(--mobile-gap);
-    padding-bottom: var(--mobile-gap);
-    padding-left: var(--mobile-gap);
+  @include mixins.for-desktop-up {
+    grid-template-columns: repeat(var(--desktop-columns), 1fr);
   }
 }
