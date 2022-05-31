@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useStore } from "hooks/useStore";
 import { observer } from "mobx-react-lite";
-import { Game } from "modules/Game";
+import { Game } from "modules/Categories/Category/Game";
 import { Category as C } from "components/Category";
 
 interface CategoryProps {

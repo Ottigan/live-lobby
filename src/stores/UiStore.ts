@@ -1,4 +1,5 @@
 import { makeAutoObservable, observable, runInAction } from "mobx";
+import { GridSize } from "types";
 import type { RootStore } from "./RootStore";
 
 export class UiStore {

@@ -1,4 +1,5 @@
 import { Database } from "db/Db";
+import { Game } from "types";
 import { isGame } from "utils";
 
 export class GamesService {

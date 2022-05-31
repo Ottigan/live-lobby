@@ -1,4 +1,5 @@
 import { Database } from "db/Db";
+import { Category } from "types";
 import { isCategory } from "utils";
 
 export class CategoriesService {

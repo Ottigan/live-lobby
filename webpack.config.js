@@ -55,6 +55,7 @@ const config = {
     },
     resolve: {
         extensions: [".js", ".ts", ".tsx"],
+        modules: [path.resolve(__dirname, "src"), "node_modules"],
         alias: {
             components: path.resolve(__dirname, "src/components"),
             declarations: path.resolve(__dirname, "src/declarations"),

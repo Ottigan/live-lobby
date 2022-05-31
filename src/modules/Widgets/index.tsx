@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "hooks/useStore";
-import { GridWidget } from "modules/GridWidget";
+import { GridWidget } from "modules/Widgets/GridWidget";
 import { Widgets as W } from "components/Widgets";
 
 interface WidgetsProps {

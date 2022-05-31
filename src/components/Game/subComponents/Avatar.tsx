@@ -11,7 +11,7 @@ interface AvatarProps {
 
 const Avatar: React.FC<AvatarProps> = (props) => {
     const { gameImageDivRef, online, opensAt } = props;
-    const [opensIn, setOpensIn] = useState("");
+    const [opensIn, setOpensIn] = useState<string | null>(null);
 
     useEffect(() => {
         setOpensIn(getDateDiff(new Date(), new Date(opensAt)));
@@ -26,9 +26,16 @@ const Avatar: React.FC<AvatarProps> = (props) => {
             {!online
                 ? (
                     <div className="overlay">
-                        Table opens in:
-                        <br />
-                        {opensIn}
+                        {opensIn
+                            ? (
+                                <>
+                                    Table opens in:
+                                    <br />
+                                    {opensIn}
+                                </>
+                            )
+                            : null
+                        }
                     </div>
                 )
                 : null}

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { WidgetsService } from "services/WidgetsService";
+import { Widget } from "types";
 import type { RootStore } from "./RootStore";
 
 export class WidgetsStore {

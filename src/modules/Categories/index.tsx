@@ -2,7 +2,7 @@ import { useStore } from "hooks/useStore";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Category } from "../Category";
+import { Category } from "./Category";
 
 interface CategoriesProps {
     className: string;

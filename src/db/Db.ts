@@ -3,6 +3,7 @@ import rouletteBg from "assets/roulette-bg.jpg";
 import largeGrid from "assets/large-grid.svg";
 import mediumGrid from "assets/medium-grid.svg";
 import smallGrid from "assets/small-grid.svg";
+import { OmitMethodNames } from "types";
 
 const MAX_BLACKJACK_PLAYERS = 7;
 
@@ -19,7 +20,7 @@ class Db {
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-30T16:00:00.000Z",
+            opensAt: "2022-05-31T16:00:00.000Z",
             description: "",
             bgImage: rouletteBg as string,
             history: [],
@@ -79,7 +80,7 @@ class Db {
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-30T15:00:00.000Z",
+            opensAt: "2022-05-31T15:00:00.000Z",
             description: "",
             bgImage: blackjackBg as string,
         },
@@ -94,7 +95,7 @@ class Db {
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-30T18:00:00.000Z",
+            opensAt: "2022-05-31T18:00:00.000Z",
             description: "",
             bgImage: rouletteBg as string,
             history: [],

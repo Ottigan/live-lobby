@@ -1,14 +1,15 @@
 import React from "react";
 import cn from "classnames";
-import Avatar from "./components/Avatar";
-import { BetLimits } from "./components/BetLimits";
-import Footer from "./components/Footer";
+import { Game as TypeGame } from "types";
+import Avatar from "./subComponents/Avatar";
+import { BetLimits } from "./subComponents/BetLimits";
+import Footer from "./subComponents/Footer";
 import styles from "./styles.module.scss";
-import { History } from "./components/History";
+import { History } from "./History";
 
 interface GameProps {
     gameImageDivRef: React.MutableRefObject<HTMLDivElement | null>;
-    game: Game;
+    game: TypeGame;
 }
 
 export const Game: React.FC<GameProps> = (props) => {

@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import { Game as G } from "components/Game";
 import { useStore } from "hooks/useStore";
+import { Game as TypeGame } from "types";
 
 interface GameProps {
-    game: Game;
+    game: TypeGame;
 }
 
 export const Game: React.FC<GameProps> = observer((props) => {

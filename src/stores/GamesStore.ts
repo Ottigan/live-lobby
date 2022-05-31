@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { GamesService } from "services/GamesService";
+import { Game } from "types";
 import type { RootStore } from "./RootStore";
 
 export class GameStore {

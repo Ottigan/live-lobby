@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { CategoriesService } from "services/CategoriesService";
+import { Category } from "types";
 import type { RootStore } from "./RootStore";
 
 export class CategoriesStore {

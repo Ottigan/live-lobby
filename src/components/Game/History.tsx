@@ -1,3 +1,8 @@
+import React from "react";
+import cn from "classnames";
+import { Game, GameType, RouletteResultValue } from "types";
+import styles from "./styles.module.scss";
+
 enum Colors {
     Green = "green",
     Black = "black",
@@ -5,7 +10,7 @@ enum Colors {
 
 }
 
-export const RouletteResultColor: Record<RouletteResultValue, RouletteResultColor> = {
+const RouletteResultColor: Record<RouletteResultValue, Colors> = {
     0: Colors.Green,
     1: Colors.Black,
     2: Colors.Red,
@@ -43,4 +48,25 @@ export const RouletteResultColor: Record<RouletteResultValue, RouletteResultColo
     34: Colors.Red,
     35: Colors.Black,
     36: Colors.Red,
+};
+
+interface HistoryProps {
+    game: Game;
+}
+
+export const History: React.FC<HistoryProps> = ({ game }) => {
+    const { online, type } = game;
+
+    if (online && type === GameType.Roulette) {
+        return (
+            <div className={styles.History}>
+                {game.history.map((result, i) => {
+                    // eslint-disable-next-line react/no-array-index-key
+                    return <span key={i} className={cn("rol-result", RouletteResultColor[result])}>{result}</span>;
+                })}
+            </div>
+        );
+    }
+
+    return null;
 };

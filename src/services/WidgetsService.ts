@@ -1,4 +1,5 @@
 import { Database } from "db/Db";
+import { Widget } from "types";
 import { assertsWidgets } from "utils";
 
 export class WidgetsService {
