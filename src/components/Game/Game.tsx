@@ -1,11 +1,11 @@
 import React from "react";
 import cn from "classnames";
 import { Game as TypeGame } from "types";
-import Avatar from "./subComponents/Avatar";
+import { Avatar } from "./subComponents/Avatar";
 import { BetLimits } from "./subComponents/BetLimits";
-import Footer from "./subComponents/Footer";
+import { History } from "./subComponents/History";
+import { Footer } from "./subComponents/Footer";
 import styles from "./styles.module.scss";
-import { History } from "./History";
 
 interface GameProps {
     gameImageDivRef: React.MutableRefObject<HTMLDivElement | null>;

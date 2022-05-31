@@ -1,11 +1,10 @@
-$footer-height: 18%;
-
 .Game {
   --lg-font-size: calc((6vw + 3.5rem) / 7);
   --md-font-size: calc((7vw + 2rem) / 7);
   --sm-font-size: calc((5vw + 2rem) / 8);
 
   --game-font-size: var(--md-font-size);
+  --footer-height: 18%;
 
   position: relative;
   aspect-ratio: 4/3;
@@ -31,78 +30,4 @@ $footer-height: 18%;
       display: inline-block;
     }
   }
-}
-
-.Avatar {
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  transition: transform 0.3s ease-in 0.1s;
-  font-size: 1em;
-
-  :global(.overlay) {
-    position: absolute;
-    display: grid;
-    place-items: center;
-    height: calc(100% - $footer-height);
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-}
-
-.BetLimits {
-  position: absolute;
-  top: 0.5em;
-  left: 0.5em;
-  height: 1.5em;
-  width: max-content;
-  padding: 0 0.7em;
-  border-radius: 0.7em;
-  line-height: 1.5em;
-  font-size: 0.9em;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: goldenrod;
-
-  :global(.max-limits) {
-    display: none;
-  }
-}
-
-.History {
-  position: absolute;
-  bottom: $footer-height;
-  width: 100%;
-  display: flex;
-  background-color: rgb(34, 34, 34);
-  font-size: 0.8em;
-
-  :global(.rol-result) {
-    padding: 0.3vw;
-    width: 100%;
-  }
-
-  :global(.green) {
-    color: green;
-  }
-
-  :global(.red) {
-    color: red;
-  }
-}
-
-.Footer {
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: $footer-height;
-  width: 100%;
-  margin-top: auto;
-  margin-bottom: 0;
-  padding: 0 1em;
-  background-color: rgba(0, 0, 0, 0.9);
-  font-size: 0.9em;
 }

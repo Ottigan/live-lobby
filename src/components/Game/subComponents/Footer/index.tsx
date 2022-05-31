@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles.module.scss";
+import styles from "./styles.module.scss";
 
 interface FooterProps {
     name: string;
@@ -7,7 +7,7 @@ interface FooterProps {
     online: boolean;
 }
 
-const Footer: React.FC<FooterProps> = (props) => {
+export const Footer: React.FC<FooterProps> = (props) => {
     const { name, players, online } = props;
 
     return (
@@ -17,5 +17,3 @@ const Footer: React.FC<FooterProps> = (props) => {
         </footer>
     );
 };
-
-export = Footer;

@@ -1,0 +1,17 @@
+.BetLimits {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  height: 1.5em;
+  width: max-content;
+  padding: 0 0.7em;
+  border-radius: 0.7em;
+  line-height: 1.5em;
+  font-size: 0.9em;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: goldenrod;
+
+  :global(.max-limits) {
+    display: none;
+  }
+}

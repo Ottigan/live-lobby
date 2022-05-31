@@ -1,5 +1,8 @@
 import { Category, Game, Widget } from "types";
 
+const minRouletteResult = 0;
+const maxRouletteResult = 36;
+
 function hasKey<K extends string, T extends object>(
     k: K, o: T,
 ): o is T & Record<K, unknown> {
@@ -18,8 +21,8 @@ export function isGame(data: unknown): data is Game {
     && hasKey("min", data.betLimits) && typeof data.betLimits.min === "number"
     && hasKey("max", data.betLimits) && typeof data.betLimits.max === "number"
     && hasKey("currency", data.betLimits) && typeof data.betLimits.currency === "string"
-    && (!hasKey("history", data)
-        || (data.type === "roulette" && Array.isArray(data.history) && data.history.every((x) => x >= 0 || x <= 36)));
+    // eslint-disable-next-line max-len
+    && (!hasKey("history", data) || (data.type === "roulette" && Array.isArray(data.history) && data.history.every((x) => x >= minRouletteResult || x <= maxRouletteResult)));
 }
 
 export function isCategory(data: unknown): data is Category {

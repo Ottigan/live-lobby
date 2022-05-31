@@ -1,0 +1,21 @@
+.History {
+  position: absolute;
+  bottom: var(--footer-height);
+  width: 100%;
+  display: flex;
+  background-color: rgb(34, 34, 34);
+  font-size: 0.8em;
+
+  :global(.rol-result) {
+    padding: 0.3vw;
+    width: 100%;
+  }
+
+  :global(.green) {
+    color: green;
+  }
+
+  :global(.red) {
+    color: red;
+  }
+}

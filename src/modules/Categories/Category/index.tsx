@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useStore } from "hooks/useStore";
 import { observer } from "mobx-react-lite";
 import { Game } from "modules/Categories/Category/Game";
-import { Category as C } from "components/Category";
+import { Category as CategoryComponent } from "components/Category";
 
 interface CategoryProps {
     bgColor: string;
@@ -28,8 +28,8 @@ export const Category: React.FC<CategoryProps> = observer(({ bgColor, gameIds })
     }, [bgColor, gridSize]);
 
     return (
-        <C containerRef={containerRef}>
+        <CategoryComponent containerRef={containerRef}>
             {games.map((game) => <Game key={game.name} game={game} />)}
-        </C>
+        </CategoryComponent>
     );
 });

@@ -1,19 +1,14 @@
+import React from "react";
 import { useStore } from "hooks/useStore";
 import { observer } from "mobx-react-lite";
-import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Category } from "./Category";
 
-interface CategoriesProps {
-    className: string;
-}
-
-export const Categories: React.FC<CategoriesProps> = observer(({ className }) => {
-    const store = useStore();
-    const { categories } = store.categoriesStore;
+export const Categories = observer(() => {
+    const { categoriesStore: { categories } } = useStore();
 
     return (
-        <div className={className}>
+        <>
             {categories.length
                 ? (
                     <Routes>
@@ -33,11 +28,11 @@ export const Categories: React.FC<CategoriesProps> = observer(({ className }) =>
                                 />
                             );
                         })}
-                        <Route path="/*" element={<Navigate to="/roulette" replace={true} />} />
+                        <Route path="/*" element={<Navigate to={categories[0].path} replace={true} />} />
                     </Routes>
                 ) :
                 null
           }
-        </div>
+        </>
     );
 });

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
-import { Game as G } from "components/Game";
+import { Game as GameComponent } from "components/Game";
 import { useStore } from "hooks/useStore";
 import { Game as TypeGame } from "types";
 
@@ -24,6 +24,6 @@ export const Game: React.FC<GameProps> = observer((props) => {
     }, [gridSize, props.game.bgImage]);
 
     return (
-        <G gameImageDivRef={gameImageDivRef} game={game} />
+        <GameComponent gameImageDivRef={gameImageDivRef} game={game} />
     );
 });

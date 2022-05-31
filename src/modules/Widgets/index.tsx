@@ -2,17 +2,13 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "hooks/useStore";
 import { GridWidget } from "modules/Widgets/GridWidget";
-import { Widgets as W } from "components/Widgets";
+import { Widgets as WidgetsComponent } from "components/Widgets";
 
-interface WidgetsProps {
-    className: string;
-}
-
-export const Widgets: React.FC<WidgetsProps> = observer(({ className }) => {
+export const Widgets = observer(() => {
     const { uiStore, widgetsStore } = useStore();
 
     return (
-        <W className={className}>
+        <WidgetsComponent>
             {widgetsStore.getWidgets().map((widget) => {
                 const { name, options } = widget;
 
@@ -25,6 +21,6 @@ export const Widgets: React.FC<WidgetsProps> = observer(({ className }) => {
                         return null;
                 }
             })}
-        </W>
+        </WidgetsComponent>
     );
 });

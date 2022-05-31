@@ -1,4 +1,10 @@
+@use 'styles/variables';
+
 .Widgets {
+  position: absolute;
+  top: variables.$header-height;
+  height: variables.$widgets-height;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   padding: 0 0.5rem;

@@ -6,12 +6,11 @@ import styles from "./styles.module.scss";
 
 interface NavbarProps {
     categories: Category[];
-    className: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ categories, className }) => {
+export const Navbar: React.FC<NavbarProps> = ({ categories }) => {
     return (
-        <nav className={cn(styles.Navbar, className)}>
+        <nav className={cn(styles.Navbar)}>
             <ul>
                 {categories.map((category) => {
                     const { path, name } = category;

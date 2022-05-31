@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "hooks/useStore";
-import { GridWidget as G } from "components/GridWidget";
+import { GridWidget as GridWidgetComponent } from "components/GridWidget";
 import { GridSize, WidgetOption } from "types";
 
 interface GridWidgetProps {
@@ -25,7 +25,7 @@ export const GridWidget: React.FC<GridWidgetProps> = observer(({ options }) => {
                 const active = uiStore.gridSize === stringSize;
 
                 return (
-                    <G
+                    <GridWidgetComponent
                         key={title}
                         clickHandler={onClick}
                         title={title}

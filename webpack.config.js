@@ -38,7 +38,17 @@ const config = {
             },
             {
                 test: /\.(sa|sc|c)ss$/,
-                use: [stylesHandler, "css-loader", "sass-loader"],
+                use: [
+                    stylesHandler,
+                    "css-loader",
+                    "resolve-url-loader",
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true, // <-- !!IMPORTANT!!
+                        },
+                    },
+                ],
             },
             {
                 test: /\.svg$/i,
@@ -67,6 +77,7 @@ const config = {
             hooks: path.resolve(__dirname, "src/hooks"),
             services: path.resolve(__dirname, "src/services"),
             db: path.resolve(__dirname, "src/db"),
+            styles: path.resolve(__dirname, "src/styles"),
         },
     },
     optimization: {

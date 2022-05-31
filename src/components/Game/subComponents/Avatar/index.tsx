@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import cn from "classnames";
 import { getDateDiff } from "utils";
-import styles from "../styles.module.scss";
+import styles from "./styles.module.scss";
 
 interface AvatarProps {
     gameImageDivRef: React.MutableRefObject<HTMLDivElement | null>;
@@ -9,7 +9,7 @@ interface AvatarProps {
     opensAt: string;
 }
 
-const Avatar: React.FC<AvatarProps> = (props) => {
+export const Avatar: React.FC<AvatarProps> = (props) => {
     const { gameImageDivRef, online, opensAt } = props;
     const [opensIn, setOpensIn] = useState<string | null>(null);
 
@@ -34,7 +34,7 @@ const Avatar: React.FC<AvatarProps> = (props) => {
                                     {opensIn}
                                 </>
                             )
-                            : null
+                            : "Table opens now!"
                         }
                     </div>
                 )
@@ -42,5 +42,3 @@ const Avatar: React.FC<AvatarProps> = (props) => {
         </div>
     );
 };
-
-export = Avatar;
