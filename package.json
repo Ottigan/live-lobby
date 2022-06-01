@@ -4,6 +4,7 @@
   "author": "Jānis Malcāns",
   "description": "Course project of Live Lobby",
   "scripts": {
+    "deploy": "npm run build:prod && surge dist live-lobby.surge.sh",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "start": "webpack-dev-server --port 3000",
