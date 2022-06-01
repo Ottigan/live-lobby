@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "hooks/useStore";
-import { GridWidget as GridWidgetComponent } from "components/GridWidget";
-import { GridSize, WidgetOption } from "types";
+import { GridWidget as GridWidgetComponent } from "components/Widgets/subComponents/GridWidget";
+import { GridSize, GridWidgetOption } from "types";
 
 interface GridWidgetProps {
-    options: WidgetOption[] | undefined;
+    options: GridWidgetOption[];
 }
 
 export const GridWidget: React.FC<GridWidgetProps> = observer(({ options }) => {
@@ -18,23 +18,29 @@ export const GridWidget: React.FC<GridWidgetProps> = observer(({ options }) => {
     }, [uiStore]);
 
     return (
-        <>
-            {options?.map((option) => {
-                const { title, size, image } = option;
-                const stringSize = String(size);
-                const active = uiStore.gridSize === stringSize;
+        <GridWidgetComponent
+            handler={onClick}
+            activeGrid={uiStore.gridSize}
+            options={options}
+        />
 
-                return (
-                    <GridWidgetComponent
-                        key={title}
-                        clickHandler={onClick}
-                        title={title}
-                        size={stringSize}
-                        image={image}
-                        active={active}
-                    />
-                );
-            })}
-        </>
+    // <span>
+    //     {options.map((option) => {
+    //         const { title, size, image } = option;
+    //         const stringSize = String(size);
+    //         const active = uiStore.gridSize === stringSize;
+
+    //         return (
+    //             <GridWidgetComponent
+    //                 key={title}
+    //                 clickHandler={onClick}
+    //                 title={title}
+    //                 size={stringSize}
+    //                 image={image}
+    //                 active={active}
+    //             />
+    //         );
+    //     })}
+    // </span>
     );
 });

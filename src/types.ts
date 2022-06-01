@@ -23,7 +23,10 @@ export interface BaseGame {
     opensAt: string;
     description: string;
     dealer: string | null;
-    language: string;
+    language: {
+        code: string;
+        image: string;
+    };
     bgImage: string;
 }
 
@@ -53,13 +56,28 @@ export interface Category {
 
 export type GridSize = "lg" | "md" | "sm";
 
-export interface WidgetOption {
+export interface GridWidgetOption {
     size: GridSize;
     title: string;
     image: string;
 }
 
-export interface Widget {
-    name: string;
-    options?: WidgetOption[];
+export interface GridWidget {
+    name: "gridWidget";
+    options: GridWidgetOption[];
 }
+
+export interface FilterWidgetOption {
+    target: string;
+    value: number | string;
+    title: string;
+}
+
+export type Filter = FilterWidgetOption;
+
+export interface FilterWidget {
+    name: "filterWidget";
+    options: FilterWidgetOption[];
+}
+
+export type Widget = GridWidget | FilterWidget;

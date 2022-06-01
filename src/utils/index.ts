@@ -18,3 +18,15 @@ export function getDateDiff(from: Date, to: Date): string | null {
 
     return null;
 }
+
+export function getRandomMomentInNext24h(): string {
+    const HOURS_IN_DAY = 24;
+
+    const now = new Date();
+    const hours = now.getHours();
+    const newHours = hours + Math.random() * HOURS_IN_DAY;
+
+    now.setHours(newHours);
+
+    return now.toISOString();
+}

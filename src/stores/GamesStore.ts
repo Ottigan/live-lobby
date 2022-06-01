@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { GamesService } from "services/GamesService";
-import { BlackjackGame, BlackjackSeatIndex, Game } from "types";
+import { BlackjackGame, BlackjackSeatIndex, Filter, Game } from "types";
 import type { RootStore } from "./RootStore";
 
 export class GameStore {
     public isLoading = true;
-    protected games: Record<number, Game> = {};
+    public filter: Filter | null = null;
+    private games: Record<number, Game> = {};
 
     private rootStore;
 
@@ -19,7 +20,33 @@ export class GameStore {
     }
 
     public getGames(ids: number[]): Game[] {
-        return Object.values(this.games).filter(({ id }) => ids.includes(id));
+        return Object.values(this.games).filter((game) => {
+            const { id, betLimits, language } = game;
+
+            const isIdMatch = ids.includes(id);
+            const isFilterMatch = (() => {
+                switch (this?.filter?.target) {
+                    case "betLimits":
+                        return betLimits.min >= this.filter.value;
+                    case "language":
+                        return language.code === this.filter.value;
+                    default:
+                        return true;
+                }
+            })();
+
+            return isIdMatch && isFilterMatch;
+        });
+    }
+
+    public handleFilter(filter: Filter): void {
+        const currentTitle = this.filter?.title;
+
+        if (currentTitle === filter.title) {
+            this.filter = null;
+        } else {
+            this.filter = filter;
+        }
     }
 
     public async takeBlackjackSeat(gameId: number, seatIndex: BlackjackSeatIndex): Promise<void> {

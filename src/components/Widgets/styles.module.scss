@@ -5,8 +5,9 @@
   top: variables.$header-height;
   height: variables.$widgets-height;
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: 'search filter grid';
   padding: 0 0.5rem;
   background-color: rgba(0, 0, 0, 0.3);
 }

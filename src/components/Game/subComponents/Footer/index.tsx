@@ -12,7 +12,7 @@ export const Footer: React.FC<FooterProps> = ({ game }) => {
     return (
         <footer className={styles.Footer}>
             <span className={styles.LeftContainer}>
-                <img src={language} alt="flag icon" className={styles.Flag} />
+                <img src={language.image} alt="flag icon" className={styles.Flag} />
                 <p>{name}</p>
             </span>
             {online ? <span>{players}</span> : null}

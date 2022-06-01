@@ -24,6 +24,10 @@
     font-size: var(--game-font-size);
   }
 
+  &:global(.offline):hover {
+    cursor: default;
+  }
+
   &:not(:global(.offline)):hover {
     :global(.image) {
       transform: scale(1.2);

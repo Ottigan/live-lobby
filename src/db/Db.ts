@@ -8,6 +8,7 @@ import franceFlag from "assets/france.png";
 import germanyFlag from "assets/germany.png";
 import indiaFlag from "assets/india.png";
 import { OmitMethodNames } from "types";
+import { getRandomMomentInNext24h } from "utils";
 
 const MAX_BLACKJACK_PLAYERS = 7;
 
@@ -27,7 +28,10 @@ interface DbGame {
     opensAt?: string;
     description: string;
     dealer: string | null;
-    language: string;
+    language: {
+        code: string;
+        image: string;
+    };
     bgImage: string;
     history?: number[];
     seats?: Record<number, boolean>;
@@ -37,25 +41,28 @@ class Db {
     public games: Record<Id, DbGame> = {
         1: {
             id: 1,
-            name: "Test",
+            name: "Testerino Halapenjo",
             type: "roulette",
             players: 54,
             betLimits: {
                 currency: "€",
-                min: 1,
+                min: 3,
                 max: 20,
             },
             online: false,
-            opensAt: "2022-05-31T16:00:00.000Z",
+            opensAt: getRandomMomentInNext24h(),
             description: "",
             dealer: null,
-            language: ukFlag as string,
+            language: {
+                code: "uk",
+                image: ukFlag as string,
+            },
             bgImage: rouletteBg as string,
             history: [],
         },
         2: {
             id: 2,
-            name: "Foo",
+            name: "Foo Fighters",
             type: "roulette",
             players: 678,
             betLimits: {
@@ -66,7 +73,10 @@ class Db {
             online: true,
             description: "",
             dealer: "Nelson",
-            language: ukFlag as string,
+            language: {
+                code: "uk",
+                image: ukFlag as string,
+            },
             bgImage: rouletteBg as string,
             history: [0, 0, 10, 5, 33, 12, 18, 10, 5, 5],
         },
@@ -83,24 +93,30 @@ class Db {
             online: true,
             description: "",
             dealer: "Bart",
-            language: franceFlag as string,
+            language: {
+                code: "fr",
+                image: franceFlag as string,
+            },
             bgImage: rouletteBg as string,
             history: [0, 0, 10, 5, 33, 12, 18, 10, 5, 5],
         },
         4: {
             id: 4,
-            name: "Fizz",
+            name: "Pineapple on Pizza",
             type: "blackjack",
             players: 3,
             betLimits: {
                 currency: "€",
                 min: 5,
-                max: 20,
+                max: 100,
             },
             online: true,
             description: "",
             dealer: "Homer",
-            language: ukFlag as string,
+            language: {
+                code: "uk",
+                image: ukFlag as string,
+            },
             bgImage: blackjackBg as string,
             seats: {
                 1: false,
@@ -114,19 +130,22 @@ class Db {
         },
         5: {
             id: 5,
-            name: "Buzz",
+            name: "FizzBuzz",
             type: "blackjack",
             players: 5,
             betLimits: {
                 currency: "€",
                 min: 15,
-                max: 20,
+                max: 200,
             },
             online: false,
-            opensAt: "2022-05-31T15:00:00.000Z",
+            opensAt: getRandomMomentInNext24h(),
             description: "",
             dealer: null,
-            language: germanyFlag as string,
+            language: {
+                code: "de",
+                image: germanyFlag as string,
+            },
             bgImage: blackjackBg as string,
             seats: {
                 1: false,
@@ -145,14 +164,17 @@ class Db {
             players: 29,
             betLimits: {
                 currency: "€",
-                min: 1,
-                max: 20,
+                min: 5,
+                max: 2000,
             },
             online: false,
-            opensAt: "2022-05-31T18:00:00.000Z",
+            opensAt: getRandomMomentInNext24h(),
             description: "",
             dealer: "Apu",
-            language: indiaFlag as string,
+            language: {
+                code: "in",
+                image: indiaFlag as string,
+            },
             bgImage: rouletteBg as string,
             history: [],
         },
@@ -176,6 +198,31 @@ class Db {
     ];
 
     public widgets = {
+        filterWidget: {
+            name: "filterWidget",
+            options: [
+                {
+                    target: "betLimits",
+                    value: 5,
+                    title: "€ 5+",
+                },
+                {
+                    target: "betLimits",
+                    value: 1,
+                    title: "€ 1+",
+                },
+                {
+                    target: "language",
+                    value: "uk",
+                    title: "UK",
+                },
+                {
+                    target: "language",
+                    value: "de",
+                    title: "DE",
+                },
+            ],
+        },
         gridWidget: {
             name: "gridWidget",
             options: [
@@ -183,7 +230,6 @@ class Db {
                     size: "lg",
                     title: "Large grid",
                     image: largeGrid as string,
-
                 },
                 {
                     size: "md",
