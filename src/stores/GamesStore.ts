@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 import { GamesService } from "services/GamesService";
-import { Game } from "types";
+import { BlackjackGame, BlackjackSeatIndex, Game } from "types";
 import type { RootStore } from "./RootStore";
 
 export class GameStore {
     public isLoading = true;
-    protected games: Game[] = [];
+    protected games: Record<number, Game> = {};
 
     private rootStore;
 
@@ -19,7 +19,23 @@ export class GameStore {
     }
 
     public getGames(ids: number[]): Game[] {
-        return this.games.filter(({ id }) => ids.includes(id));
+        return Object.values(this.games).filter(({ id }) => ids.includes(id));
+    }
+
+    public async takeBlackjackSeat(gameId: number, seatIndex: BlackjackSeatIndex): Promise<void> {
+        const success = await GamesService.takeBlackjackSeat(gameId, seatIndex);
+
+        if (success) {
+            runInAction(() => {
+                (this.games[gameId] as BlackjackGame) = {
+                    ...(this.games[gameId] as BlackjackGame),
+                    seats: {
+                        ...(this.games[gameId] as BlackjackGame).seats,
+                        [seatIndex]: true,
+                    },
+                };
+            });
+        }
     }
 
     private requestGames(): void {

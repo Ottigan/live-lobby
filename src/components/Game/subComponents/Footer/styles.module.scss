@@ -8,7 +8,29 @@
   width: 100%;
   margin-top: auto;
   margin-bottom: 0;
-  padding: 0 1em;
+  padding: 0.2em 1em;
   background-color: rgba(0, 0, 0, 0.9);
   font-size: 0.9em;
+
+  .LeftContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    max-width: 75%;
+
+    .Flag {
+      height: auto;
+      width: 22%;
+      padding-right: 0.5em;
+    }
+
+    p {
+      height: min-content;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1;
+    }
+  }
 }

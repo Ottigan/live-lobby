@@ -1,18 +1,20 @@
 import React from "react";
+import { Game } from "types";
 import styles from "./styles.module.scss";
 
 interface FooterProps {
-    name: string;
-    players: number;
-    online: boolean;
+    game: Game;
 }
 
-export const Footer: React.FC<FooterProps> = (props) => {
-    const { name, players, online } = props;
+export const Footer: React.FC<FooterProps> = ({ game }) => {
+    const { name, players, language, online } = game;
 
     return (
         <footer className={styles.Footer}>
-            <span>{name}</span>
+            <span className={styles.LeftContainer}>
+                <img src={language} alt="flag icon" className={styles.Flag} />
+                <p>{name}</p>
+            </span>
             {online ? <span>{players}</span> : null}
         </footer>
     );

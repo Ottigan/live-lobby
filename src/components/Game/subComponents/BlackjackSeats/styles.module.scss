@@ -1,0 +1,26 @@
+.BlackjackSeats {
+  position: absolute;
+  bottom: var(--footer-height);
+  width: 100%;
+  display: flex;
+  padding: 0 0.5em 0.2em;
+
+  .Seat {
+    width: calc(100% / 7);
+    aspect-ratio: 1 / 1;
+    margin: 0.2em;
+    border: 2px solid rgb(85, 85, 85);
+    border-radius: 50%;
+    background-color: grey;
+    cursor: pointer;
+
+    &:global(.taken),
+    &:hover {
+      background-color: green;
+    }
+
+    &:global(.taken) {
+      cursor: auto;
+    }
+  }
+}
