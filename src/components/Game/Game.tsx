@@ -20,7 +20,7 @@ export const Game: React.FC<GameProps> = (props) => {
     const { betLimits, online, dealer, opensAt } = game;
 
     return (
-        <div className={cn(styles.game, { offline: !online })}>
+        <div className={cn(styles.game, { [styles.offline]: !online })}>
             <Avatar gameImageDivRef={gameImageDivRef} online={online} opensAt={opensAt} />
             <BetLimits {...betLimits} />
             <Dealer dealer={dealer} />

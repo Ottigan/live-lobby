@@ -1,40 +1,95 @@
 @use 'styles/variables';
+@use 'styles/mixins';
 
 .filterWidget {
+  $filter-width: calc(variables.$widgets-height * 3);
+  $font-size: calc(variables.$widgets-height * 0.3);
+  $border-radius: 0.5rem;
+
   grid-area: filter;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: calc(variables.$widgets-height * 0.25);
+  justify-self: end;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
 
-  .option {
-    position: relative;
+  label {
+    display: grid;
+    place-items: center;
     height: 100%;
-    width: calc(variables.$widgets-height * 1.3);
-    margin: calc(variables.$widgets-height * 0.1);
+    width: $filter-width;
+    border-radius: $border-radius;
     background-color: variables.$widgets-main-color;
-    color: variables.$widgets-accent-color;
-    pointer-events: none;
+    color: #757575;
+    font-size: $font-size;
+    letter-spacing: 2px;
 
-    &:global(.active) {
-      background-color: variables.$widgets-accent-color;
-      color: variables.$widgets-main-color;
+    &.checked {
+      color: variables.$widgets-accent-color;
     }
 
-    &:after {
-      content: attr(data-title);
-      position: absolute;
-      top: -5%;
-      display: grid;
-      place-items: center;
-      height: 110%;
+    input {
+      display: none;
+    }
+  }
+
+  .filters {
+    position: absolute;
+    z-index: 1;
+    top: calc(variables.$widgets-height + variables.$mobile-grid-gap);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 0;
+    width: $filter-width;
+    overflow: hidden;
+    background-color: transparent;
+    transition: none;
+
+    @include mixins.for-tablet-up {
+      top: calc(variables.$widgets-height + variables.$desktop-grid-gap);
+    }
+
+    .option {
+      position: relative;
+      height: 0;
       width: 100%;
-      background-color: inherit;
-      font-size: calc(variables.$widgets-height * 0.3);
-      font-weight: 600;
-      border-radius: 1rem;
-      pointer-events: auto;
+      border-radius: $border-radius;
+      background-color: variables.$widgets-main-color;
+      color: variables.$widgets-accent-color;
+      font-size: 0;
+      letter-spacing: normal;
       cursor: pointer;
+      transition: height 0.2s linear;
+
+      &.active {
+        background-color: variables.$widgets-accent-color;
+        color: variables.$widgets-main-color;
+      }
+
+      &:first-child {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
+
+      &:last-child {
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+
+    &.show {
+      height: 180px;
+      transition: height 0.2s linear, font-size 0.2s linear;
+
+      .option {
+        height: 100%;
+        font-size: $font-size;
+        transition: font-size 0.1s linear 0.2s;
+      }
     }
   }
 }

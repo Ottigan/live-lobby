@@ -24,7 +24,7 @@ export const GridWidget: React.FC<GridWidgetProps> = (props) => {
                         key={title}
                         onClick={handler}
                         value={size}
-                        className={cn(styles.option, { active })}
+                        className={cn(styles.option, { [styles.active]: active })}
                         name={title}
                         type="button"
                         title={title}

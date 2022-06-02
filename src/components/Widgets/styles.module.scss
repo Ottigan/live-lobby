@@ -9,11 +9,11 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas: 'search filter';
-  padding: 0 0.5rem;
+  padding: calc(variables.$widgets-height * 0.15) 0.5rem;
   background-color: rgba(0, 0, 0, 0.3);
 
   @include mixins.for-tablet-up {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr) min-content;
     grid-template-areas: 'search filter grid';
   }
 }

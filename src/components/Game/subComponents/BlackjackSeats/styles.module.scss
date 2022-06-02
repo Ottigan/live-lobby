@@ -18,10 +18,10 @@
     &:hover {
       background-color: rgb(0, 128, 0);
     }
+  }
 
-    &:global(.taken) {
-      background-color: rgb(34, 28, 28);
-      cursor: auto;
-    }
+  .taken {
+    background-color: rgb(34, 28, 28);
+    cursor: auto;
   }
 }

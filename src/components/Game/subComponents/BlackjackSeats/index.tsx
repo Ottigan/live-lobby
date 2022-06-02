@@ -31,7 +31,7 @@ export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, blackjackS
                             type="button"
                             onClick={handleClick}
                             value={k}
-                            className={cn(styles.seat, { taken: game.seats[k] })}
+                            className={cn(styles.seat, { [styles.taken]: game.seats[k] })}
                         >
                             &#8203;
                         </button>

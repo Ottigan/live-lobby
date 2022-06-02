@@ -1,19 +1,20 @@
-@use '../../../../styles/variables';
+@use 'styles/variables';
 
 .searchWidget {
-  $input-height: calc(variables.$widgets-height * 0.6);
-  $input-width: calc(variables.$widgets-height * 5);
-  $input-margin: calc(variables.$widgets-height * 0.2);
+  $input-height: calc(variables.$widgets-height * 0.7);
+  $input-width: calc(variables.$widgets-height * 4);
+  $input-margin: calc(variables.$widgets-height * 0.15);
 
   grid-area: search;
+  height: 100%;
   max-width: $input-width;
-  margin: $input-margin;
   padding: 0 calc($input-height / 2);
   border-radius: calc($input-height / 2);
   border: none;
   outline: none;
   background-color: variables.$widgets-main-color;
   color: variables.$widgets-accent-color;
+  font-size: calc(variables.$widgets-height * 0.3);
   font-family: 'Roboto', sans-serif;
   font-weight: 800;
   letter-spacing: 2px;

@@ -21,28 +21,22 @@
   --laptop-columns: var(--md-laptop-columns);
   --desktop-columns: var(--md-desktop-columns);
   --bg-color: #3e3e53;
-  --desktop-gap: 1.2vw;
-  --mobile-gap: 2vw;
 
   display: grid;
-  gap: var(--mobile-gap);
+  gap: variables.$mobile-grid-gap;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto 1fr;
   height: calc(100vh - variables.$header-height);
   width: 100%;
-  padding-top: calc(variables.$widgets-height + var(--mobile-gap));
-  padding-right: var(--mobile-gap);
-  padding-bottom: var(--mobile-gap);
-  padding-left: var(--mobile-gap);
+  padding: variables.$mobile-grid-gap;
+  padding-top: calc(variables.$widgets-height + variables.$mobile-grid-gap);
   background-color: var(--bg-color);
 
   @include mixins.for-tablet-up {
-    gap: var(--desktop-gap);
+    gap: variables.$desktop-grid-gap;
     grid-template-columns: repeat(var(--tablet-columns), 1fr);
-    padding-top: calc(variables.$widgets-height + var(--desktop-gap));
-    padding-right: var(--desktop-gap);
-    padding-bottom: var(--desktop-gap);
-    padding-left: var(--desktop-gap);
+    padding: variables.$desktop-grid-gap;
+    padding-top: calc(variables.$widgets-height + variables.$desktop-grid-gap);
   }
 
   @include mixins.for-laptop-up {

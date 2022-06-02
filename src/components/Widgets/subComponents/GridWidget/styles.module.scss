@@ -3,18 +3,22 @@
 .gridWidget {
   grid-area: grid;
   display: flex;
-  justify-content: flex-end;
+  height: 100%;
 
   .option {
-    height: calc(variables.$widgets-height * 0.6);
-    margin: calc(variables.$widgets-height * 0.2);
+    height: 100%;
+    margin: 0 calc(variables.$widgets-height * 0.15);
     background-color: transparent;
     border: none;
     outline: none;
     box-shadow: none;
     cursor: pointer;
 
-    &:global(.active) svg {
+    &:first-child {
+      margin-left: calc(variables.$widgets-height * 0.3);
+    }
+
+    &.active svg {
       fill: variables.$widgets-accent-color;
     }
 

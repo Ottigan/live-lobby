@@ -24,11 +24,11 @@
     font-size: var(--game-font-size);
   }
 
-  &:global(.offline):hover {
+  &.offline:hover {
     cursor: default;
   }
 
-  &:not(:global(.offline)):hover {
+  &:not(.offline):hover {
     :global(.image) {
       transform: scale(1.2);
     }
