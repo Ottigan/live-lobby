@@ -28,7 +28,7 @@ export const FilterWidget: React.FC<FilterWidgetProps> = (props) => {
                 Filters
                 <input onChange={handleDropdown} type="checkbox" />
             </label>
-            <div className={cn(styles.filters, { [styles.show]: showFilters })}>
+            <div className={cn(styles.container, { [styles.show]: showFilters })}>
                 {options.map((option) => {
                     const { title } = option;
                     const active = activeFilter === title;
