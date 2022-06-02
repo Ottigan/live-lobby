@@ -13,7 +13,7 @@ export const FilterWidget: React.FC<FilterWidgetProps> = (props) => {
     const { handler, activeFilter, options } = props;
 
     return (
-        <span className={styles.FilterWidget}>
+        <span className={styles.filterWidget}>
             {options.map((option) => {
                 const { title } = option;
                 const active = activeFilter === title;
@@ -26,7 +26,7 @@ export const FilterWidget: React.FC<FilterWidgetProps> = (props) => {
                         checked={active}
                         type="checkbox"
                         title={title}
-                        className={cn(styles.Option, { active })}
+                        className={cn(styles.option, { active })}
                         data-title={title}
                     />
                 );

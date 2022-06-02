@@ -1,13 +1,13 @@
 @use 'styles/variables';
 
-.FilterWidget {
+.filterWidget {
   grid-area: filter;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: calc(variables.$widgets-height * 0.25);
 
-  .Option {
+  .option {
     position: relative;
     height: 100%;
     width: calc(variables.$widgets-height * 1.3);

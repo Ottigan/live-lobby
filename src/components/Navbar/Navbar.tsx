@@ -10,7 +10,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ categories }) => {
     return (
-        <nav className={cn(styles.Navbar)}>
+        <nav className={cn(styles.navbar)}>
             <ul>
                 {categories.map((category) => {
                     const { path, name } = category;

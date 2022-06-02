@@ -196,9 +196,17 @@ class Db {
     ];
 
     public widgets = {
+        searchWidget: {
+            name: "searchWidget",
+        },
         filterWidget: {
             name: "filterWidget",
             options: [
+                {
+                    target: "betLimits",
+                    value: 10,
+                    title: "€ 10+",
+                },
                 {
                     target: "betLimits",
                     value: 5,

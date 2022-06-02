@@ -1,11 +1,11 @@
 @use 'styles/variables';
 
-.GridWidget {
+.gridWidget {
   grid-area: grid;
   display: flex;
   justify-content: flex-end;
 
-  .Option {
+  .option {
     height: calc(variables.$widgets-height * 0.6);
     margin: calc(variables.$widgets-height * 0.2);
     background-color: transparent;

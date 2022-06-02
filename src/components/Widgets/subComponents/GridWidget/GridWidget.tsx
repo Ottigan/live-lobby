@@ -13,8 +13,7 @@ export const GridWidget: React.FC<GridWidgetProps> = (props) => {
     const { handler, activeGrid, options } = props;
 
     return (
-
-        <span className={styles.GridWidget}>
+        <span className={styles.gridWidget}>
             {options.map((option) => {
                 const { title, size, image: Svg } = option;
                 const stringSize = String(size);
@@ -25,7 +24,7 @@ export const GridWidget: React.FC<GridWidgetProps> = (props) => {
                         key={title}
                         onClick={handler}
                         value={size}
-                        className={cn(styles.Option, { active })}
+                        className={cn(styles.option, { active })}
                         name={title}
                         type="button"
                         title={title}

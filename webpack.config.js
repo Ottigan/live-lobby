@@ -41,7 +41,12 @@ const config = {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
                     stylesHandler,
-                    "css-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true,
+                        },
+                    },
                     "resolve-url-loader",
                     {
                         loader: "sass-loader",

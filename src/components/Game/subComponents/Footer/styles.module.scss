@@ -1,4 +1,4 @@
-.Footer {
+.footer {
   position: absolute;
   bottom: 0;
   display: flex;
@@ -12,14 +12,14 @@
   background-color: rgba(0, 0, 0, 0.9);
   font-size: 0.9em;
 
-  .LeftContainer {
+  .leftContainer {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 100%;
     max-width: 75%;
 
-    .Flag {
+    .flag {
       height: auto;
       width: 15%;
       margin-right: 0.5em;

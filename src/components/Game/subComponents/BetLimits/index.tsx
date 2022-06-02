@@ -11,7 +11,7 @@ export const BetLimits: React.FC<BetLimitsProps> = (props) => {
     const { currency, min, max } = props;
 
     return (
-        <div className={styles.BetLimits}>
+        <div className={styles.betLimits}>
             <span>{`${currency} ${min} `}</span>
             <span className="max-limits">{`- ${max}`}</span>
         </div>

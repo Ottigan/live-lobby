@@ -1,9 +1,10 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "hooks/useStore";
-import { GridWidget } from "modules/Widgets/GridWidget";
 import { Widgets as WidgetsComponent } from "components/Widgets";
+import { GridWidget } from "./GridWidget";
 import { FilterWidget } from "./FilterWidget";
+import { SearchWidget } from "./SearchWidget";
 
 export const Widgets = observer(() => {
     const { uiStore, widgetsStore } = useStore();
@@ -11,15 +12,17 @@ export const Widgets = observer(() => {
     return (
         <WidgetsComponent>
             {widgetsStore.getWidgets().map((widget) => {
-                const { name, options } = widget;
+                const { name } = widget;
 
                 switch (name) {
+                    case "searchWidget":
+                        return <SearchWidget key={name} />;
+                    case "filterWidget":
+                        return <FilterWidget key={name} options={widget.options} />;
                     case "gridWidget":
                         return uiStore.windowDimensions.width > 420
-                            ? <GridWidget key={name} options={options} />
+                            ? <GridWidget key={name} options={widget.options} />
                             : null;
-                    case "filterWidget":
-                        return <FilterWidget key={name} options={(options)} />;
                     default:
                         return null;
                 }

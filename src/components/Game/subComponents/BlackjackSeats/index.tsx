@@ -21,7 +21,7 @@ export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, blackjackS
 
     if (online && type === GameType.Blackjack) {
         return (
-            <div className={styles.BlackjackSeats}>
+            <div className={styles.blackjackSeats}>
                 {Object.keys(game.seats).map((key) => {
                     const k = key as BlackjackSeatIndex;
 
@@ -31,7 +31,7 @@ export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, blackjackS
                             type="button"
                             onClick={handleClick}
                             value={k}
-                            className={cn(styles.Seat, { taken: game.seats[k] })}
+                            className={cn(styles.seat, { taken: game.seats[k] })}
                         >
                             &#8203;
                         </button>

@@ -10,7 +10,7 @@ export const Category: React.FC<CategoryProps> = (props) => {
     const { containerRef, children } = props;
 
     return (
-        <div ref={containerRef} className={styles.Category}>
+        <div ref={containerRef} className={styles.category}>
             {children}
         </div>
     );

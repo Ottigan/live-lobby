@@ -80,4 +80,8 @@ export interface FilterWidget {
     options: FilterWidgetOption[];
 }
 
-export type Widget = GridWidget | FilterWidget;
+export interface SearchWidget {
+    name: "searchWidget";
+}
+
+export type Widget = GridWidget | FilterWidget | SearchWidget;

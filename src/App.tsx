@@ -10,7 +10,7 @@ export const App = observer(() => {
     return (
         <RootStoreContext.Provider value={store}>
             <BrowserRouter>
-                <main className={styles.App}>
+                <main className={styles.app}>
                     <Home />
                 </main>
             </BrowserRouter>

@@ -6,6 +6,7 @@ import type { RootStore } from "./RootStore";
 
 export class GameStore {
     public isLoading = true;
+    public search = "";
     public filter: Filter | null = null;
     private games: Record<number, Game> = {};
 
@@ -21,7 +22,7 @@ export class GameStore {
 
     public getGames(ids: number[]): Game[] {
         return Object.values(this.games).filter((game) => {
-            const { id, betLimits, language } = game;
+            const { id, name, betLimits, language } = game;
 
             const isIdMatch = ids.includes(id);
             const isFilterMatch = (() => {
@@ -35,7 +36,9 @@ export class GameStore {
                 }
             })();
 
-            return isIdMatch && isFilterMatch;
+            const isSearchMatch = new RegExp(`${this.search}`, "i").test(name);
+
+            return isIdMatch && isFilterMatch && isSearchMatch;
         });
     }
 
@@ -47,6 +50,10 @@ export class GameStore {
         } else {
             this.filter = filter;
         }
+    }
+
+    public handleSearch(value: string): void {
+        this.search = value;
     }
 
     public async takeBlackjackSeat(gameId: number, seatIndex: BlackjackSeatIndex): Promise<void> {

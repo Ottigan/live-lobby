@@ -10,7 +10,7 @@ export const Widgets: React.FC<WidgetsProps> = (props) => {
     const { children } = props;
 
     return (
-        <div className={cn(styles.Widgets)}>
+        <div className={cn(styles.widgets)}>
             {children}
         </div>
     );

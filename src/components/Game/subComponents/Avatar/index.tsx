@@ -22,7 +22,7 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
     }, [opensAt]);
 
     return (
-        <div className={cn(styles.Avatar, "image")} ref={gameImageDivRef}>
+        <div className={cn(styles.avatar, "image")} ref={gameImageDivRef}>
             {!online
                 ? (
                     <div className="overlay">
