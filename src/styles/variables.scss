@@ -1,2 +1,4 @@
-$header-height: 10rem;
-$widgets-height: 3rem;
+$header-height: calc((9vw + 6rem) / 2);
+$widgets-height: calc((3vw + 6rem) / 3);
+$widgets-main-color: #111117;
+$widgets-accent-color: #d5d5d8;

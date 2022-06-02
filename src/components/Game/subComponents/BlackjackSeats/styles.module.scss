@@ -2,13 +2,14 @@
   position: absolute;
   bottom: var(--footer-height);
   width: 100%;
-  display: flex;
-  padding: 0 0.5em 0.2em;
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0.2em 0.5em;
 
   .Seat {
-    width: calc(100% / 7);
-    aspect-ratio: 1 / 1;
-    margin: 0.2em;
+    aspect-ratio: 1;
+    min-height: 0;
     border: 2px solid rgb(85, 85, 85);
     border-radius: 50%;
     background-color: grey;

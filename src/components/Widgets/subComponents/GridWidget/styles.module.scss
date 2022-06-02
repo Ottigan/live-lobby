@@ -1,29 +1,32 @@
+@use 'styles/variables';
+
 .GridWidget {
   grid-area: grid;
   display: flex;
   justify-content: flex-end;
 
   .Option {
+    height: calc(variables.$widgets-height * 0.6);
+    margin: calc(variables.$widgets-height * 0.2);
     background-color: transparent;
     border: none;
     outline: none;
     box-shadow: none;
-    margin: 0.5rem;
     cursor: pointer;
 
     &:global(.active) svg {
-      fill: rgba(255, 255, 255, 0.8);
+      fill: variables.$widgets-accent-color;
     }
 
     &:hover svg {
-      fill: rgba(255, 255, 255, 0.8);
+      fill: variables.$widgets-accent-color;
     }
 
     svg {
       pointer-events: none;
       height: 100%;
       width: auto;
-      fill: rgba(0, 0, 0, 0.6);
+      fill: variables.$widgets-main-color;
     }
   }
 }

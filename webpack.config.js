@@ -25,7 +25,7 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            filename: "200.html",
+            filename: isProduction ? "200.html" : "index.html", // to accommodate Surge.sh specifics in regards to React-router
         }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/

@@ -28,6 +28,7 @@ export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, blackjackS
                     return (
                         <button
                             key={k}
+                            type="button"
                             onClick={handleClick}
                             value={k}
                             className={cn(styles.Seat, { taken: game.seats[k] })}

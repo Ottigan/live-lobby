@@ -28,7 +28,7 @@
 
   a {
     padding: 0 1.5rem;
-    font-size: 2rem;
+    font-size: calc(variables.$header-height * 0.3);
     color: grey;
     text-decoration: none;
 

@@ -18,7 +18,7 @@ export class WidgetsStore {
     }
 
     public getWidgets(): Widget[] {
-        return Object.keys(this.widgets).map((key) => this.widgets[key]);
+        return Object.values(this.widgets);
     }
 
     private requestWidgets(): void {

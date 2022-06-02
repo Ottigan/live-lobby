@@ -23,24 +23,5 @@ export const GridWidget: React.FC<GridWidgetProps> = observer(({ options }) => {
             activeGrid={uiStore.gridSize}
             options={options}
         />
-
-    // <span>
-    //     {options.map((option) => {
-    //         const { title, size, image } = option;
-    //         const stringSize = String(size);
-    //         const active = uiStore.gridSize === stringSize;
-
-    //         return (
-    //             <GridWidgetComponent
-    //                 key={title}
-    //                 clickHandler={onClick}
-    //                 title={title}
-    //                 size={stringSize}
-    //                 image={image}
-    //                 active={active}
-    //             />
-    //         );
-    //     })}
-    // </span>
     );
 });
