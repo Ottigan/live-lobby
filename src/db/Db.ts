@@ -10,8 +10,6 @@ import indiaFlag from "assets/india.png";
 import { OmitMethodNames } from "types";
 import { getRandomMomentInNext24h } from "utils";
 
-const MAX_BLACKJACK_PLAYERS = 7;
-
 type Id = number;
 
 interface DbGame {
@@ -104,7 +102,7 @@ class Db {
             id: 4,
             name: "Pineapple on Pizza",
             type: "blackjack",
-            players: 3,
+            players: 2,
             betLimits: {
                 currency: "€",
                 min: 5,
@@ -259,6 +257,7 @@ class Db {
     }
 
     public async takeBlackjackSeat(gameId: Id, seatIndex: number): Promise<unknown> {
+        // Verifying if seat is empty
         const result = await new Promise<boolean>((resolve) => {
             setTimeout(() => {
                 return resolve(this.games[gameId]?.seats?.[seatIndex] === false);
@@ -267,7 +266,8 @@ class Db {
 
         if (result) {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            this.games[gameId]!.seats![seatIndex] = true;
+            this.games[gameId].seats![seatIndex] = true;
+            this.games[gameId].players++;
         }
 
         return result;
@@ -279,15 +279,12 @@ class Db {
 
             const changes = Math.round(Math.random() * 10);
 
-            if (Math.random() > 0.5) {
-                const sum = players + changes;
-
-                this.games[id].players =
-          type === "blackjack" && sum > MAX_BLACKJACK_PLAYERS
-              ? MAX_BLACKJACK_PLAYERS
-              : sum;
-            } else {
-                this.games[id].players = changes > players ? 0 : players - changes;
+            if (type === "roulette") {
+                if (Math.random() > 0.5) {
+                    this.games[id].players = players + changes;
+                } else {
+                    this.games[id].players = changes > players ? 0 : players - changes;
+                }
             }
         });
     }

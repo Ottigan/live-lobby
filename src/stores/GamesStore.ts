@@ -53,11 +53,14 @@ export class GameStore {
         const success = await GamesService.takeBlackjackSeat(gameId, seatIndex);
 
         if (success) {
+            const game = this.games[gameId] as BlackjackGame;
+
             runInAction(() => {
-                (this.games[gameId] as BlackjackGame) = {
-                    ...(this.games[gameId] as BlackjackGame),
+                this.games[gameId] = {
+                    ...game,
+                    players: game.players + 1,
                     seats: {
-                        ...(this.games[gameId] as BlackjackGame).seats,
+                        ...game.seats,
                         [seatIndex]: true,
                     },
                 };
