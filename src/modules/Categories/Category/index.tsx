@@ -10,10 +10,10 @@ interface CategoryProps {
 }
 
 export const Category: React.FC<CategoryProps> = observer(({ bgColor, gameIds }) => {
-    const store = useStore();
+    const { gamesStore, uiStore } = useStore();
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const { gridSize } = store.uiStore;
-    const games = store.gamesStore.getGames(gameIds);
+    const { gridSize } = uiStore;
+    const games = gamesStore.getGames(gameIds);
 
     useEffect(() => {
         const style = getComputedStyle((containerRef.current as HTMLDivElement));
