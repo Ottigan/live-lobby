@@ -1,0 +1,25 @@
+name: CI deploy to surge
+
+on:
+  workflow_run:
+    workflows: ['CI test']
+    types: [completed]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+
+      - name: Install dependencies
+        run: npm i
+      - name: Run production build
+        run: npm run build:prod
+      - name: Rename index.html to 200.html
+        run: mv dist/index.html dist/200.html
+      - run: npm i -g surge
+      - run: surge dist ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}

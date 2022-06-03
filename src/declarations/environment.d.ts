@@ -6,8 +6,7 @@ declare global {
     namespace NodeJS {
 
         interface ProcessEnv {
-            LOCAL_BASENAME: number;
-            GH_PAGES_BASENAME: string;
+            BASENAME: string;
             NODE_ENV: Env;
         }
     }
