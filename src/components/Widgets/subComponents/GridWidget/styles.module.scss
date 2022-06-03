@@ -19,18 +19,18 @@
     }
 
     &.active svg {
-      fill: variables.$widgets-accent-color;
+      fill: variables.$accent-color;
     }
 
     &:hover svg {
-      fill: variables.$widgets-accent-color;
+      fill: variables.$accent-color;
     }
 
     svg {
       pointer-events: none;
       height: 100%;
       width: auto;
-      fill: variables.$widgets-main-color;
+      fill: variables.$main-color;
     }
   }
 }

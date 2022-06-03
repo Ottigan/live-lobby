@@ -1,9 +1,33 @@
+@use 'styles/variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 :root {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   color: white;
+
+  &::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: variables.$main-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: variables.$dimmed-color;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: variables.$accent-color;
+  }
+
+  @supports (scrollbar-color: variables.$dimmed-color variables.$main-color) and
+    (scrollbar-width: thin) {
+    scrollbar-color: variables.$dimmed-color variables.$main-color;
+    scrollbar-width: thin;
+  }
 }
 
 *,
@@ -16,12 +40,10 @@
 
 .app {
   min-height: 100vh;
-  min-width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   text-align: center;
   background-color: rgb(7, 23, 39);
 }

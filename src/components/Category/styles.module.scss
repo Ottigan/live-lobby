@@ -26,7 +26,7 @@
   gap: variables.$mobile-grid-gap;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto 1fr;
-  height: calc(100vh - variables.$header-height);
+  min-height: calc(100vh - variables.$header-height);
   width: 100%;
   padding: variables.$mobile-grid-gap;
   padding-top: calc(variables.$widgets-height + variables.$mobile-grid-gap);

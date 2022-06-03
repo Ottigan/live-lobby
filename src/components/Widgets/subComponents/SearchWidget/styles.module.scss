@@ -12,8 +12,8 @@
   border-radius: calc($input-height / 2);
   border: none;
   outline: none;
-  background-color: variables.$widgets-main-color;
-  color: variables.$widgets-accent-color;
+  background-color: variables.$main-color;
+  color: variables.$accent-color;
   font-size: calc(variables.$widgets-height * 0.3);
   font-family: 'Roboto', sans-serif;
   font-weight: 800;

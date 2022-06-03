@@ -17,13 +17,13 @@
     height: 100%;
     width: $filter-width;
     border-radius: $border-radius;
-    background-color: variables.$widgets-main-color;
-    color: #757575;
+    background-color: variables.$main-color;
+    color: variables.$dimmed-color;
     font-size: $font-size;
     letter-spacing: 2px;
 
     &.checked {
-      color: variables.$widgets-accent-color;
+      color: variables.$accent-color;
     }
 
     input {
@@ -56,16 +56,16 @@
       height: 0;
       width: 100%;
       border-radius: $border-radius;
-      background-color: variables.$widgets-main-color;
-      color: variables.$widgets-accent-color;
+      background-color: variables.$main-color;
+      color: variables.$accent-color;
       font-size: 0;
       letter-spacing: normal;
       cursor: pointer;
       transition: height 0.2s linear;
 
       &.active {
-        background-color: variables.$widgets-accent-color;
-        color: variables.$widgets-main-color;
+        background-color: variables.$accent-color;
+        color: variables.$main-color;
       }
 
       &:first-child {
