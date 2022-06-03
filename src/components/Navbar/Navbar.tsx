@@ -16,7 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ categories }) => {
                     const { path, name } = category;
 
                     return (
-                        <li key={name}>
+                        <li key={name} data-testid={name}>
                             <NavLink to={path}>{name}</NavLink>
                         </li>
                     );
