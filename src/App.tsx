@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 export const App = observer(() => {
     return (
         <RootStoreContext.Provider value={store}>
-            <BrowserRouter>
+            <BrowserRouter basename="live-lobby">
                 <main className={styles.app}>
                     <Home />
                 </main>

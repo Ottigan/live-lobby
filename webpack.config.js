@@ -18,7 +18,8 @@ const config = {
         filename: "static/[name].[contenthash].js",
     },
     devServer: {
-        open: true,
+        open: ["/live-lobby"],
+        hot: true,
         historyApiFallback: true,
         host: "localhost",
     },
