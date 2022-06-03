@@ -1,3 +1,8 @@
+export enum Env {
+    Production = "production",
+    Development = "development",
+}
+
 export type OmitMethodNames<T> = NonNullable<
   {
       // eslint-disable-next-line @typescript-eslint/ban-types

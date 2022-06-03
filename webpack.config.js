@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -18,7 +19,7 @@ const config = {
         filename: "static/[name].[contenthash].js",
     },
     devServer: {
-        open: ["/live-lobby"],
+        open: true,
         hot: true,
         historyApiFallback: true,
         host: "localhost",
@@ -26,8 +27,9 @@ const config = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
-            filename: isProduction ? "200.html" : "index.html", // to accommodate Surge.sh specifics in regards to React-router
+            filename: "index.html", // to accommodate Surge.sh specifics in regards to React-router
         }),
+        new Dotenv(),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],
