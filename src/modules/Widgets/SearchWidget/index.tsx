@@ -11,8 +11,9 @@ export const SearchWidget = observer(() => {
     const [currSearch, setSearch, debouncedSearch] = useDebounce(gamesStore.search);
 
     useEffect(() => {
+        setSearch("");
         gamesStore.handleSearch("");
-    }, [gamesStore, location.pathname]);
+    }, [gamesStore, location.pathname, setSearch]);
 
     useEffect(() => {
         gamesStore.handleSearch(debouncedSearch);
