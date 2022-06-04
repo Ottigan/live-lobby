@@ -14,6 +14,7 @@ export const SearchWidget: React.FC<SearchWidgetProps> = ({ handler, value }) =>
             type="text"
             placeholder="Search..."
             className={styles.searchWidget}
+            data-testid="search-widget"
         />
     );
 };
