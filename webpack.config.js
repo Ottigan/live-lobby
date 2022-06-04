@@ -41,7 +41,7 @@ module.exports = () => {
         plugins: [
             new HtmlWebpackPlugin({
                 template: "./src/index.html",
-                filename: "index.html", // to accommodate Surge.sh specifics in regards to React-router
+                filename: "index.html",
             }),
             new webpack.DefinePlugin(definitions),
             // Add your plugins here

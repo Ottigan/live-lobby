@@ -1,28 +1,28 @@
-name: CI deploy to gh pages
+# name: CI deploy to gh pages
 
-on:
-  workflow_run:
-    workflows: ["CI test"]
-    types:
-      - completed
+# on:
+#   workflow_run:
+#     workflows: ["CI test"]
+#     types:
+#       - completed
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14.x'
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: '14.x'
 
-      - name: Install dependencies
-        run: npm i
-      - name: Run gh-pages build
-        run: npm run build:gh-pages
-      - name: Deploy to Github pages
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
-        with:
-          branch: gh-pages
-          folder: dist
-          token: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Install dependencies
+#         run: npm i
+#       - name: Run gh-pages build
+#         run: npm run build:gh-pages
+#       - name: Deploy to Github pages
+#         uses: JamesIves/github-pages-deploy-action@v4.3.3
+#         with:
+#           branch: gh-pages
+#           folder: dist
+#           token: ${{ secrets.GITHUB_TOKEN }}
