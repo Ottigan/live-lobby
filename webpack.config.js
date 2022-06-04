@@ -1,25 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = () => {
     const isProduction = process.env.NODE_ENV === "production";
-    const definitions = (() => {
-        const base = {
-            "process.env": {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
-            },
-        };
-
-        if (process.env.BASENAME) {
-            base["process.env"].BASENAME = JSON.stringify(process.env.BASENAME);
-        }
-
-        return base;
-    })();
 
     const stylesHandler = isProduction
         ? MiniCssExtractPlugin.loader
@@ -43,7 +29,6 @@ module.exports = () => {
                 template: "./src/index.html",
                 filename: "index.html",
             }),
-            new webpack.DefinePlugin(definitions),
             // Add your plugins here
             // Learn more about plugins from https://webpack.js.org/configuration/plugins/
         ],

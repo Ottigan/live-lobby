@@ -1,5 +1,5 @@
 {
-  "homepage": "https://ottigan.github.io/live-lobby",
+  "homepage": "http://live-lobby.surge.sh",
   "name": "live-lobby",
   "version": "1.0.0",
   "author": "Jānis Malcāns",
@@ -7,7 +7,6 @@
   "scripts": {
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
-    "build:gh-pages": "cross-env BASENAME=live-lobby webpack --mode=production --node-env=production",
     "start": "webpack-dev-server --port 3000",
     "tsm:watch": "npx typed-scss-modules src -w",
     "test": "jest"
@@ -31,7 +30,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
-    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^3.4.1",
     "eslint": "^8.15.0",
