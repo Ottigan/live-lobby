@@ -11,7 +11,7 @@ interface CategoryProps {
 
 export const Category: React.FC<CategoryProps> = observer(({ bgColor, gameIds }) => {
     const { gamesStore, uiStore } = useStore();
-    const containerRef = useRef<HTMLDivElement | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const { gridSize } = uiStore;
     const games = gamesStore.getGames(gameIds);
 

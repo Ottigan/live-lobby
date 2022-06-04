@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 interface CategoryProps {
-    containerRef: React.MutableRefObject<HTMLDivElement | null>;
+    containerRef: React.RefObject<HTMLDivElement>;
     children: React.ReactNode;
 }
 
