@@ -3,6 +3,16 @@ declare module "*.module.scss" {
     export = classNames;
 }
 
-declare module "*.jpg";
-declare module "*.svg";
-declare module "*.png";
+declare module "*.jpg" {
+    const path: string;
+    export = path;
+}
+
+declare module "*.svg" {
+    const path: string;
+    export = path;
+}
+declare module "*.png" {
+    const path: string;
+    export = path;
+}

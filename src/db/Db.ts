@@ -53,9 +53,9 @@ class Db {
             dealer: null,
             language: {
                 code: "uk",
-                image: ukFlag as string,
+                image: ukFlag,
             },
-            bgImage: rouletteBg as string,
+            bgImage: rouletteBg,
             history: [],
         },
         2: {
@@ -73,9 +73,9 @@ class Db {
             dealer: "Nelson",
             language: {
                 code: "uk",
-                image: ukFlag as string,
+                image: ukFlag,
             },
-            bgImage: rouletteBg as string,
+            bgImage: rouletteBg,
             history: [0, 0, 10, 5, 33, 12, 18, 10, 5, 5],
         },
         3: {
@@ -93,9 +93,9 @@ class Db {
             dealer: "Bart",
             language: {
                 code: "fr",
-                image: franceFlag as string,
+                image: franceFlag,
             },
-            bgImage: rouletteBg as string,
+            bgImage: rouletteBg,
             history: [0, 0, 10, 5, 33, 12, 18, 10, 5, 5],
         },
         4: {
@@ -113,9 +113,9 @@ class Db {
             dealer: "Homer",
             language: {
                 code: "uk",
-                image: ukFlag as string,
+                image: ukFlag,
             },
-            bgImage: blackjackBg as string,
+            bgImage: blackjackBg,
             seats: {
                 1: false,
                 2: false,
@@ -142,9 +142,9 @@ class Db {
             dealer: null,
             language: {
                 code: "de",
-                image: germanyFlag as string,
+                image: germanyFlag,
             },
-            bgImage: blackjackBg as string,
+            bgImage: blackjackBg,
             seats: {
                 1: false,
                 2: false,
@@ -171,9 +171,9 @@ class Db {
             dealer: "Apu",
             language: {
                 code: "in",
-                image: indiaFlag as string,
+                image: indiaFlag,
             },
-            bgImage: rouletteBg as string,
+            bgImage: rouletteBg,
             history: [],
         },
     };
@@ -235,17 +235,17 @@ class Db {
                 {
                     size: "lg",
                     title: "Large grid",
-                    image: largeGrid as string,
+                    image: largeGrid,
                 },
                 {
                     size: "md",
                     title: "Medium grid",
-                    image: mediumGrid as string,
+                    image: mediumGrid,
                 },
                 {
                     size: "sm",
                     title: "Small grid",
-                    image: smallGrid as string,
+                    image: smallGrid,
                 },
             ],
         },
