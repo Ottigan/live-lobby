@@ -10,23 +10,23 @@ import { BlackjackSeats } from "./subComponents/BlackjackSeats";
 import styles from "./styles.module.scss";
 
 interface GameProps {
-    gameImageDivRef: React.MutableRefObject<HTMLDivElement | null>;
-    blackjackSeatHandler: (id: number, index: BlackjackSeatIndex) => Promise<void>;
+    blackjackSeatHandler: (id: number, index: BlackjackSeatIndex) => void;
+    gameImageDivRef: React.RefObject<HTMLDivElement>;
     game: TypeGame;
 }
 
 export const Game: React.FC<GameProps> = (props) => {
-    const { gameImageDivRef, blackjackSeatHandler, game } = props;
-    const { betLimits, online, dealer, opensAt } = game;
+    const { blackjackSeatHandler, gameImageDivRef, game } = props;
+    const { name, betLimits, players, online, dealer, language, opensAt } = game;
 
     return (
-        <div className={cn(styles.game, { [styles.offline]: !online })}>
+        <div className={cn(styles.game, { [styles.offline]: !online })} data-testid="game">
             <Avatar gameImageDivRef={gameImageDivRef} online={online} opensAt={opensAt} />
             <BetLimits {...betLimits} />
             <Dealer dealer={dealer} />
-            <BlackjackSeats game={game} blackjackSeatHandler={blackjackSeatHandler} />
+            <BlackjackSeats game={game} handler={blackjackSeatHandler} />
             <History game={game} />
-            <Footer game={game} />
+            <Footer name={name} players={players} language={language} online={online} />
         </div>
     );
 };

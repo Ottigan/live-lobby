@@ -4,26 +4,26 @@ import { BlackjackSeatIndex, Game, GameType } from "types";
 import styles from "./styles.module.scss";
 
 interface BlackjackSeatsProps {
+    handler: (id: number, index: BlackjackSeatIndex) => void;
     game: Game;
-    blackjackSeatHandler: (id: number, index: BlackjackSeatIndex) => Promise<void>;
 }
 
-export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, blackjackSeatHandler }) => {
+export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, handler }) => {
     const { id, online, type } = game;
 
     const handleClick = useCallback((e: React.MouseEvent) => {
-        const { value } = e.target as HTMLButtonElement;
+        const value = (e.target as HTMLButtonElement).value as BlackjackSeatIndex;
 
-        blackjackSeatHandler(id, (value as BlackjackSeatIndex))
-            // eslint-disable-next-line no-console
-            .catch((err) => console.error(err));
-    }, [blackjackSeatHandler, id]);
+        handler(id, value);
+    }, [handler, id]);
 
     if (online && type === GameType.Blackjack) {
         return (
-            <div className={styles.blackjackSeats}>
+            <div className={styles.blackjackSeats} data-testid="game-blackjack-seats">
                 {Object.keys(game.seats).map((key) => {
                     const k = key as BlackjackSeatIndex;
+
+                    const taken = game.seats[k];
 
                     return (
                         <button
@@ -31,10 +31,10 @@ export const BlackjackSeats: React.FC<BlackjackSeatsProps> = ({ game, blackjackS
                             type="button"
                             onClick={handleClick}
                             value={k}
-                            className={cn(styles.seat, { [styles.taken]: game.seats[k] })}
-                        >
-                            &#8203;
-                        </button>
+                            className={cn(styles.seat, { taken })}
+                            disabled={taken}
+                            data-testid={`game-blackjack-seat-${key}`}
+                        />
                     );
                 })}
             </div>

@@ -59,7 +59,7 @@ export const History: React.FC<HistoryProps> = ({ game }) => {
 
     if (online && type === GameType.Roulette) {
         return (
-            <div className={styles.history}>
+            <div className={styles.history} data-testid="game-history">
                 {game.history.map((result, i) => {
                     // eslint-disable-next-line react/no-array-index-key
                     return <span key={i} className={cn(styles.rolResult, RouletteResultColor[result])}>{result}</span>;

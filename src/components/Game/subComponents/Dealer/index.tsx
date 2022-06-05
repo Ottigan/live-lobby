@@ -8,5 +8,5 @@ interface DealerProps {
 export const Dealer: React.FC<DealerProps> = (props) => {
     const { dealer } = props;
 
-    return <p className={styles.dealer}>{dealer}</p>;
+    return <p className={styles.dealer} data-testid="game-dealer">{dealer}</p>;
 };

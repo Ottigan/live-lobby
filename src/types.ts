@@ -25,7 +25,7 @@ export interface BaseGame {
         max: number;
     };
     online: boolean;
-    opensAt: string;
+    opensAt?: string;
     description: string;
     dealer: string | null;
     language: {
