@@ -6,7 +6,7 @@ import type { RootStore } from "./RootStore";
 
 export class WidgetsStore {
     public isLoading = true;
-    protected widgets: Record<string, Widget> = {};
+    protected _widgets: Widget[] = [];
 
     private rootStore;
 
@@ -17,19 +17,24 @@ export class WidgetsStore {
         this.requestWidgets();
     }
 
-    public getWidgets(): Widget[] {
-        return Object.values(this.widgets);
+    public set widgets(widgets: Widget[]) {
+        this._widgets = widgets;
+    }
+
+    public get widgets(): Widget[] {
+        return this._widgets;
     }
 
     private requestWidgets(): void {
         WidgetsService.getWidgets()
-            .then((widgets) => runInAction(() => {
-                this.isLoading = false;
+            .then((widgets) => {
                 this.widgets = widgets;
-            }))
+            })
             .catch((err) => {
                 console.error(err);
+            })
+            .finally(() => runInAction(() => {
                 this.isLoading = false;
-            });
+            }));
     }
 }

@@ -22,23 +22,7 @@ export class GameStore {
 
     public getGames(ids: number[]): Game[] {
         return Object.values(this.games).filter((game) => {
-            const { id, name, betLimits, language } = game;
-
-            const isIdMatch = ids.includes(id);
-            const isFilterMatch = (() => {
-                switch (this?.filter?.target) {
-                    case "betLimits":
-                        return betLimits.min >= this.filter.value;
-                    case "language":
-                        return language.code === this.filter.value;
-                    default:
-                        return true;
-                }
-            })();
-
-            const isSearchMatch = new RegExp(`${this.search}`, "i").test(name);
-
-            return isIdMatch && isFilterMatch && isSearchMatch;
+            return ids.includes(game.id) && this.isFilterMatch(game) && this.isSearchMatch(game);
         });
     }
 
@@ -75,15 +59,33 @@ export class GameStore {
         }
     }
 
+    protected isFilterMatch(game: Game): boolean {
+        const { betLimits, language } = game;
+
+        switch (this?.filter?.target) {
+            case "betLimits":
+                return betLimits.min >= this.filter.value;
+            case "language":
+                return language.code === this.filter.value;
+            default:
+                return true;
+        }
+    }
+
+    protected isSearchMatch(game: Game): boolean {
+        return new RegExp(`${this.search}`, "i").test(game.name);
+    }
+
     private requestGames(): void {
         GamesService.getGames()
             .then((games) => runInAction(() => {
-                this.isLoading = false;
                 this.games = games;
             }))
             .catch((err) => {
                 console.error(err);
+            })
+            .finally(() => runInAction(() => {
                 this.isLoading = false;
-            });
+            }));
     }
 }

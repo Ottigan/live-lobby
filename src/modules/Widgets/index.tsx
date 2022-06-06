@@ -11,7 +11,7 @@ export const Widgets = observer(() => {
 
     return (
         <WidgetsComponent>
-            {widgetsStore.getWidgets().map((widget) => {
+            {widgetsStore.widgets.map((widget) => {
                 const { name } = widget;
 
                 switch (name) {

@@ -195,11 +195,11 @@ class Db {
         },
     ];
 
-    public widgets = {
-        searchWidget: {
+    public widgets = [
+        {
             name: "searchWidget",
         },
-        filterWidget: {
+        {
             name: "filterWidget",
             options: [
                 {
@@ -229,7 +229,7 @@ class Db {
                 },
             ],
         },
-        gridWidget: {
+        {
             name: "gridWidget",
             options: [
                 {
@@ -249,12 +249,10 @@ class Db {
                 },
             ],
         },
-    };
+    ];
 
     public constructor() {
         setInterval(() => this.updatePlayers(), 3000);
-
-        this.takeBlackjackSeat = this.takeBlackjackSeat.bind(this);
     }
 
     // Simulating async query
@@ -265,20 +263,21 @@ class Db {
     }
 
     public async takeBlackjackSeat(gameId: Id, seatIndex: number): Promise<unknown> {
-        // Verifying if seat is empty
-        const result = await new Promise<boolean>((resolve) => {
+        // Updating seat status by reference and returning outcome
+        const isSuccess = new Promise<boolean>((resolve) => {
             setTimeout(() => {
-                return resolve(this.games[gameId]?.seats?.[seatIndex] === false);
+                const game = this.games[gameId];
+                const seats = game.seats;
+
+                if (seats && seats[seatIndex] === false) {
+                    resolve(seats[seatIndex] = true);
+                }
+
+                resolve(false);
             }, Math.random() * 1000);
         });
 
-        if (result) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            this.games[gameId].seats![seatIndex] = true;
-            this.games[gameId].players++;
-        }
-
-        return result;
+        return isSuccess;
     }
 
     private updatePlayers(): void {

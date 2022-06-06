@@ -6,7 +6,7 @@ import type { RootStore } from "./RootStore";
 
 export class CategoriesStore {
     public isLoading = true;
-    public categories: Category[] = [];
+    private _categories: Category[] = [];
 
     private rootStore;
 
@@ -17,17 +17,24 @@ export class CategoriesStore {
         this.requestCategories();
     }
 
+    public set categories(categories: Category[]) {
+        this._categories = categories;
+    }
+
+    public get categories(): Category[] {
+        return this._categories;
+    }
+
     private requestCategories(): void {
         CategoriesService.getCategories()
             .then((categories) => {
-                runInAction(() => {
-                    this.isLoading = false;
-                    this.categories = categories;
-                });
+                this.categories = categories;
             })
             .catch((err) => {
                 console.error(err);
+            })
+            .finally(() => runInAction(() => {
                 this.isLoading = false;
-            });
+            }));
     }
 }
