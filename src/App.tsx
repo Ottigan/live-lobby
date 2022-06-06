@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { RootStoreContext } from "hooks/useStore";
-import { Home } from "modules/Home";
+import { Home } from "screens/Home";
 import { store } from "./stores/RootStore";
 import styles from "./styles.module.scss";
 
