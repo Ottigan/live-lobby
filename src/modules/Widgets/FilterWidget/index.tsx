@@ -12,7 +12,7 @@ export const FilterWidget: React.FC<FilterWidgetProps> = observer(({ options }) 
     const { gamesStore } = useStore();
 
     const onClick = useCallback((filter: Filter) => {
-        gamesStore.handleFilter(filter);
+        gamesStore.filter = filter;
     }, [gamesStore]);
 
     return (

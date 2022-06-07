@@ -270,7 +270,10 @@ class Db {
                 const seats = game.seats;
 
                 if (seats && seats[seatIndex] === false) {
-                    resolve(seats[seatIndex] = true);
+                    seats[seatIndex] = true;
+                    game.players++;
+
+                    resolve(true);
                 }
 
                 resolve(false);

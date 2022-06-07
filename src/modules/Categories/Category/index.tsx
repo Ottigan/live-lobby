@@ -12,19 +12,21 @@ interface CategoryProps {
 export const Category: React.FC<CategoryProps> = observer(({ bgColor, gameIds }) => {
     const { gamesStore, uiStore } = useStore();
     const containerRef = useRef<HTMLDivElement>(null);
-    const { gridSize } = uiStore;
     const games = gamesStore.getGames(gameIds);
+    const { gridSize } = uiStore;
 
     useEffect(() => {
-        const style = getComputedStyle((containerRef.current as HTMLDivElement));
-        const desktopValue = style.getPropertyValue(`--${gridSize}-desktop-columns`);
-        const laptopValue = style.getPropertyValue(`--${gridSize}-laptop-columns`);
-        const tabletValue = style.getPropertyValue(`--${gridSize}-tablet-columns`);
+        if (containerRef.current) {
+            const style = getComputedStyle((containerRef.current));
+            const desktopValue = style.getPropertyValue(`--${gridSize}-desktop-columns`);
+            const laptopValue = style.getPropertyValue(`--${gridSize}-laptop-columns`);
+            const tabletValue = style.getPropertyValue(`--${gridSize}-tablet-columns`);
 
-        containerRef.current?.style.setProperty("--bg-color", bgColor);
-        containerRef.current?.style.setProperty("--desktop-columns", desktopValue);
-        containerRef.current?.style.setProperty("--laptop-columns", laptopValue);
-        containerRef.current?.style.setProperty("--tablet-columns", tabletValue);
+            containerRef.current?.style.setProperty("--bg-color", bgColor);
+            containerRef.current?.style.setProperty("--desktop-columns", desktopValue);
+            containerRef.current?.style.setProperty("--laptop-columns", laptopValue);
+            containerRef.current?.style.setProperty("--tablet-columns", tabletValue);
+        }
     }, [bgColor, gridSize]);
 
     return (

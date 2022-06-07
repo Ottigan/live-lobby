@@ -1,12 +1,12 @@
 import { makeAutoObservable, observable, runInAction } from "mobx";
 import { GridSize } from "types";
-import type { RootStore } from "./RootStore";
+import type { RootStore } from "stores/RootStore";
 
 export class UiStore {
     public gridSize: GridSize = "md";
     public windowDimensions = {
-        width: window.innerWidth,
         height: window.innerHeight,
+        width: window.innerWidth,
     };
 
     private rootStore;

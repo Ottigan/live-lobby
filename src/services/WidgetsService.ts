@@ -1,10 +1,18 @@
 import { Database } from "db/Db";
-import { Widget } from "types";
+import { WidgetsStore } from "stores/WidgetsStore";
+import { Store, Widget } from "types";
 
 export class WidgetsService {
-    public static async getWidgets(): Promise<Widget[]> {
+    private stores: Store[] = [];
+
+    public constructor(stores: Store[]) {
+        this.stores = stores;
+    }
+
+    public async getWidgets(): Promise<void> {
         const widgets = await Database.find("widgets") as Widget[];
 
-        return widgets;
+        const widgetsStore = this.stores.find((store) => store instanceof WidgetsStore) as WidgetsStore;
+        widgetsStore.widgets = widgets;
     }
 }

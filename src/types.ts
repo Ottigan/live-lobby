@@ -1,7 +1,14 @@
+import type { CategoriesStore } from "stores/CategoriesStore";
+import type { GamesStore } from "stores/GamesStore";
+import type { UiStore } from "stores/UiStore";
+import type { WidgetsStore } from "stores/WidgetsStore";
+
 export enum Env {
     Production = "production",
     Development = "development",
 }
+
+export type Store = CategoriesStore | GamesStore | UiStore | WidgetsStore;
 
 export type OmitMethodNames<T> = NonNullable<
   {
@@ -11,8 +18,8 @@ export type OmitMethodNames<T> = NonNullable<
 >;
 
 export enum GameType {
-    Roulette = "roulette",
     Blackjack = "blackjack",
+    Roulette = "roulette",
 }
 
 export interface BaseGame {
@@ -35,6 +42,12 @@ export interface BaseGame {
     bgImage: string;
 }
 
+export type BlackjackSeatIndex = "1" | "2" | "3" | "4" | "5" | "6" | "7";
+export interface BlackjackGame extends BaseGame {
+    type: GameType.Blackjack;
+    seats: Record<BlackjackSeatIndex, boolean>;
+}
+
 export interface RouletteGame extends BaseGame {
     type: GameType.Roulette;
     history: RouletteResultValue[];
@@ -43,13 +56,7 @@ export interface RouletteGame extends BaseGame {
 // eslint-disable-next-line max-len
 export type RouletteResultValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36;
 
-export type BlackjackSeatIndex = "1" | "2" | "3" | "4" | "5" | "6" | "7";
-export interface BlackjackGame extends BaseGame {
-    type: GameType.Blackjack;
-    seats: Record<BlackjackSeatIndex, boolean>;
-}
-
-export type Game = RouletteGame | BlackjackGame;
+export type Game = BlackjackGame | RouletteGame;
 
 export interface Category {
     name: string;
@@ -78,7 +85,7 @@ export interface FilterWidgetOption {
     title: string;
 }
 
-export type Filter = FilterWidgetOption;
+export type Filter = FilterWidgetOption | null;
 
 export interface FilterWidget {
     name: "filterWidget";

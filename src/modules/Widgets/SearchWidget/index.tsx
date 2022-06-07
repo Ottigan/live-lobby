@@ -12,11 +12,11 @@ export const SearchWidget = observer(() => {
 
     useEffect(() => {
         setSearch("");
-        gamesStore.handleSearch("");
+        gamesStore.search = "";
     }, [gamesStore, location.pathname, setSearch]);
 
     useEffect(() => {
-        gamesStore.handleSearch(debouncedSearch);
+        gamesStore.search = debouncedSearch;
     }, [gamesStore, debouncedSearch]);
 
     const onChange = useCallback((e: React.ChangeEvent) => {

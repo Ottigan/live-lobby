@@ -10,7 +10,7 @@ interface GameProps {
 
 export const Game: React.FC<GameProps> = observer((props) => {
     const gameImageDivRef = useRef<HTMLDivElement>(null);
-    const { gamesStore, uiStore: { gridSize } } = useStore();
+    const { gamesService, uiStore: { gridSize } } = useStore();
     const { game } = props;
 
     useEffect(() => {
@@ -24,9 +24,8 @@ export const Game: React.FC<GameProps> = observer((props) => {
     }, [gridSize, props.game.bgImage]);
 
     const blackjackSeatHandler = useCallback((id: number, index: BlackjackSeatIndex) => {
-        // eslint-disable-next-line no-console
-        gamesStore.takeBlackjackSeat(id, index).catch((err) => console.error(err));
-    }, [gamesStore]);
+        gamesService.takeBlackjackSeat(id, index).catch((err) => console.error(err));
+    }, [gamesService]);
 
     return (
         <GameComponent gameImageDivRef={gameImageDivRef} game={game} blackjackSeatHandler={blackjackSeatHandler} />

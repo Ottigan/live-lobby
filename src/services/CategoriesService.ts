@@ -1,10 +1,18 @@
 import { Database } from "db/Db";
-import { Category } from "types";
+import { CategoriesStore } from "stores/CategoriesStore";
+import { Category, Store } from "types";
 
 export class CategoriesService {
-    public static async getCategories(): Promise<Category[]> {
+    private stores: Store[] = [];
+
+    public constructor(stores: Store[]) {
+        this.stores = stores;
+    }
+
+    public async getCategories(): Promise<void> {
         const categories = await Database.find("categories") as Category[];
 
-        return categories;
+        const categoriesStore = this.stores.find((store) => store instanceof CategoriesStore) as CategoriesStore;
+        categoriesStore.categories = categories;
     }
 }
