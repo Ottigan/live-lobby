@@ -12,7 +12,10 @@ export class WidgetsService {
     public async getWidgets(): Promise<void> {
         const widgets = await Database.find("widgets") as Widget[];
 
-        const widgetsStore = this.stores.find((store) => store instanceof WidgetsStore) as WidgetsStore;
-        widgetsStore.widgets = widgets;
+        const store = this.stores.find((s) => s instanceof WidgetsStore);
+
+        if (store) {
+            (store as WidgetsStore).widgets = widgets;
+        }
     }
 }

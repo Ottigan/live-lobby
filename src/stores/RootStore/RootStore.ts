@@ -3,9 +3,9 @@ import { UiStore } from "stores/UiStore/UiStore";
 import { CategoriesStore } from "stores/CategoriesStore";
 import { GamesStore } from "stores/GamesStore";
 import { WidgetsStore } from "stores/WidgetsStore/WidgetsStore";
-import { CategoriesService } from "services/CategoriesService";
-import { WidgetsService } from "services/WidgetsService";
-import { GamesService } from "services/GamesService";
+import { CategoriesService } from "services/CategoriesService/CategoriesService";
+import { WidgetsService } from "services/WidgetsService/WidgetsService";
+import { GamesService } from "services/GamesService/GamesService";
 
 export class RootStore {
     public categoriesStore;

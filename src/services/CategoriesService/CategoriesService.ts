@@ -12,7 +12,10 @@ export class CategoriesService {
     public async getCategories(): Promise<void> {
         const categories = await Database.find("categories") as Category[];
 
-        const categoriesStore = this.stores.find((store) => store instanceof CategoriesStore) as CategoriesStore;
-        categoriesStore.categories = categories;
+        const store = this.stores.find((s) => s instanceof CategoriesStore);
+
+        if (store) {
+            (store as CategoriesStore).categories = categories;
+        }
     }
 }
