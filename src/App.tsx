@@ -12,9 +12,11 @@ export const App = observer(() => {
     const { categoriesService, categoriesStore, gamesService, gamesStore, widgetsService, widgetsStore } = store;
 
     useEffect(() => {
-        categoriesService.getCategories()
-            .catch((err) => console.error(err))
-            .finally(() => { categoriesStore.isLoading = false; });
+        function getCategories() {
+            categoriesService.getCategories()
+                .catch((err) => console.error(err))
+                .finally(() => { categoriesStore.isLoading = false; });
+        }
 
         function getGames() {
             gamesService.getGames()
@@ -22,15 +24,19 @@ export const App = observer(() => {
                 .finally(() => { gamesStore.isLoading = false; });
         }
 
+        getCategories();
         getGames();
 
-        const getGamesInterval = setInterval(getGames, 1000);
+        const getInterval = setInterval(() => {
+            getCategories();
+            getGames();
+        }, 1000);
 
         widgetsService.getWidgets()
             .catch((err) => console.error(err))
             .finally(() => { widgetsStore.isLoading = false; });
 
-        return () => clearInterval(getGamesInterval);
+        return () => clearInterval(getInterval);
     }, [categoriesService, categoriesStore, gamesService, gamesStore, widgetsService, widgetsStore]);
 
     return (

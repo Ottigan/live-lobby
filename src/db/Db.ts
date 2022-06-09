@@ -1,3 +1,4 @@
+import baccaratBg from "assets/baccarat-bg.jpg";
 import blackjackBg from "assets/blackjack-bg.jpg";
 import rouletteBg from "assets/roulette-bg.jpg";
 import largeGrid from "assets/large-grid.svg";
@@ -31,7 +32,7 @@ interface DbGame {
         image: string;
     };
     bgImage: string;
-    history?: number[];
+    history?: number[] | [string, string, string, string, string, string][];
     seats?: Record<number, boolean>;
 }
 
@@ -168,7 +169,7 @@ class Db {
             online: false,
             opensAt: getRandomMomentInNext24h(),
             description: "",
-            dealer: "Apu",
+            dealer: null,
             language: {
                 code: "in",
                 image: indiaFlag,
@@ -176,18 +177,76 @@ class Db {
             bgImage: rouletteBg,
             history: [],
         },
+        7: {
+            id: 7,
+            name: "Adult Tic Tac Toe",
+            type: "baccarat",
+            players: 29,
+            betLimits: {
+                currency: "€",
+                min: 5,
+                max: 2000,
+            },
+            online: true,
+            description: "",
+            dealer: "Ultron",
+            language: {
+                code: "uk",
+                image: ukFlag,
+            },
+            bgImage: baccaratBg,
+            history: [
+                ["banker", "banker", "banker", "", "", ""],
+                ["player", "player", "playerTie", "", "", ""],
+                ["banker", "bankerTie", "bankerTie", "", "", ""],
+                ["player", "", "", "", "", ""],
+                ["banker", "banker", "banker", "banker", "", ""],
+                ["player", "player", "", "", "", ""],
+                ["banker", "banker", "banker", "banker", "banker", "banker"],
+                ["player", "player", "", "", "", "banker"],
+                ["banker", "", "", "", "", "banker"],
+                ["player", "playerTie", "playerTie", "", "", ""],
+                ["banker", "banker", "", "", "", ""],
+                ["playerTie", "player", "player", "", "", ""],
+                ["banker", "banker", "banker", "banker", "banker", "banker"],
+                ["player", "player", "", "", "", ""],
+                ["banker", "banker", "banker", "", "", ""],
+                ["player", "", "", "", "", ""],
+                ["banker", "banker", "banker", "banker", "banker", "banker"],
+                ["player", "playerTie", "player", "", "", ""],
+                ["banker", "banker", "", "", "", ""],
+                ["player", "player", "", "", "", ""],
+                ["banker", "banker", "banker", "banker", "banker", ""],
+                ["player", "", "", "", "", ""],
+                ["banker", "banker", "banker", "banker", "banker", "banker"],
+                ["playerTie", "player", "", "", "", ""],
+                ["banker", "banker", "", "", "", ""],
+                ["player", "player", "player", "player", "player", "playerTie"],
+                ["", "", "", "", "", "player"],
+                ["", "", "", "", "", "player"],
+                ["", "", "", "", "", "player"],
+                ["", "", "", "", "", ""],
+            ],
+        },
     };
 
     public categories = [
         {
-            name: "Blackjacks",
+            name: "Baccarat",
+            path: "baccarat",
+            descriptor: "baccarat",
+            gameIds: [7],
+            bgColor: "#3f3050",
+        },
+        {
+            name: "Blackjack",
             path: "blackjack",
             descriptor: "blackjack",
             gameIds: [4, 5],
             bgColor: "#332424",
         },
         {
-            name: "Roulettes",
+            name: "Roulette",
             path: "roulette",
             descriptor: "roulette",
             gameIds: [1, 2, 3, 6],
@@ -253,6 +312,7 @@ class Db {
 
     public constructor() {
         setInterval(() => this.updatePlayers(), 3000);
+        setTimeout(() => this.addPromoCategory(), 3000 + Math.random() * 2000);
     }
 
     // Simulating async query
@@ -297,6 +357,18 @@ class Db {
                 }
             }
         });
+    }
+
+    private addPromoCategory(): void {
+        const promoCategory = {
+            name: "Promotion",
+            path: "promotion",
+            descriptor: "promo",
+            gameIds: [7, 3, 4],
+            bgColor: "#14474d",
+        };
+
+        this.categories.push(promoCategory);
     }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from "react";
 import cn from "classnames";
 import { Game, GameType, RouletteResultValue } from "types";
@@ -57,15 +58,34 @@ interface HistoryProps {
 export const History: React.FC<HistoryProps> = ({ game }) => {
     const { online, type } = game;
 
-    if (online && type === GameType.Roulette) {
-        return (
-            <div className={styles.history} data-testid="game-history">
-                {game.history.map((result, i) => {
-                    // eslint-disable-next-line react/no-array-index-key
-                    return <span key={i} className={cn(styles.rolResult, RouletteResultColor[result])}>{result}</span>;
-                })}
-            </div>
-        );
+    if (online) {
+        if (type === GameType.Baccarat) {
+            return (
+                <div className={styles.baccaratHistory} data-testid="game-history">
+                    {game.history.map((column, i) => {
+                        return (
+                            <div key={i} className={cn(styles.bacColumn)}>
+                                {column.map((result, y) => {
+                                    return (
+                                        <span key={y} className={cn(styles.bacResult, result)} data-testid={result} />
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        }
+
+        if (type === GameType.Roulette) {
+            return (
+                <div className={styles.rouletteHistory} data-testid="game-history">
+                    {game.history.map((result, i) => {
+                        return <span key={i} className={cn(styles.rolResult, RouletteResultColor[result])}>{result}</span>;
+                    })}
+                </div>
+            );
+        }
     }
 
     return null;

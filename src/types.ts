@@ -18,6 +18,7 @@ export type OmitMethodNames<T> = NonNullable<
 >;
 
 export enum GameType {
+    Baccarat = "baccarat",
     Blackjack = "blackjack",
     Roulette = "roulette",
 }
@@ -42,6 +43,14 @@ export interface BaseGame {
     bgImage: string;
 }
 
+export type BaccaratResult = "banker" | "bankerTie" | "player" | "playerTie" | "";
+export type BaccaratResultColumn = [BaccaratResult, BaccaratResult, BaccaratResult, BaccaratResult, BaccaratResult, BaccaratResult];
+
+export interface BaccaratGame extends BaseGame {
+    type: GameType.Baccarat;
+    history: BaccaratResultColumn[];
+}
+
 export type BlackjackSeatIndex = "1" | "2" | "3" | "4" | "5" | "6" | "7";
 export interface BlackjackGame extends BaseGame {
     type: GameType.Blackjack;
@@ -56,7 +65,7 @@ export interface RouletteGame extends BaseGame {
 // eslint-disable-next-line max-len
 export type RouletteResultValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36;
 
-export type Game = BlackjackGame | RouletteGame;
+export type Game = BaccaratGame | BlackjackGame | RouletteGame;
 
 export interface Category {
     name: string;
