@@ -27,6 +27,7 @@ export const App = observer(() => {
         getCategories();
         getGames();
 
+        // Using interval as a substitute to WebSockets
         const getInterval = setInterval(() => {
             getCategories();
             getGames();
