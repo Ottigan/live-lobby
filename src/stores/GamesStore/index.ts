@@ -1,1 +1,0 @@
-export { GamesStore } from "./GamesStore";

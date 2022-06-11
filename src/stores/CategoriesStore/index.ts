@@ -1,1 +1,0 @@
-export { CategoriesStore } from "./CategoriesStore";
