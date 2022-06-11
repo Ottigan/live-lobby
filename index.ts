@@ -25,6 +25,6 @@ wss.on("connection", (ws, request) => {
     }
 });
 
-server.listen(1337, () => {
+server.listen(process.env.PORT || 1337, () => {
     console.log(`Server started`);
 });
