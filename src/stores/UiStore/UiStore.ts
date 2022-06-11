@@ -1,6 +1,5 @@
 import { makeAutoObservable, observable, runInAction } from "mobx";
 import { GridSize } from "types";
-import type { RootStore } from "stores/RootStore";
 
 export class UiStore {
     public gridSize: GridSize = "md";
@@ -9,9 +8,7 @@ export class UiStore {
         width: window.innerWidth,
     };
 
-    private rootStore;
-
-    public constructor(rootStore: RootStore) {
+    public constructor() {
         makeAutoObservable(this, { windowDimensions: observable.struct });
 
         window.onresize = (e) => {
@@ -28,8 +25,6 @@ export class UiStore {
         if (gridSize && ["lg", "md", "sm"].includes(gridSize)) {
             this.setGridSize((gridSize as GridSize));
         }
-
-        this.rootStore = rootStore;
     }
 
     public setGridSize(value: GridSize): void {

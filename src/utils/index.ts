@@ -30,3 +30,16 @@ export function getRandomMomentInNext24h(): string {
 
     return now.toISOString();
 }
+
+export function b64toUrl(data: string): string {
+    const byteCharacters = window.atob(data);
+
+    const ab = new ArrayBuffer(byteCharacters.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+        ia[i] = byteCharacters.charCodeAt(i);
+    }
+
+    return window.URL.createObjectURL(new Blob([ab], { type: "image/jpeg" }));
+}

@@ -1,21 +1,10 @@
 /**
  * @jest-environment node
  */
-import { RootStore } from "stores/RootStore";
 import { WidgetsStore } from "stores/WidgetsStore";
+import { LobbyTransport } from "transports";
+import { Stores, Widget } from "types";
 import { WidgetsService } from "./WidgetsService";
-
-const DB_RESPONSE = "data";
-
-jest.mock("db/Db", () => {
-    return {
-        Database: {
-            find: jest.fn(() => {
-                return DB_RESPONSE;
-            }),
-        },
-    };
-});
 
 describe("WidgetsService", () => {
     beforeEach(() => {
@@ -26,15 +15,39 @@ describe("WidgetsService", () => {
         jest.clearAllMocks();
     });
 
-    test("getWidgets should update WidgetsStore", async () => {
-        const rootStore = new RootStore();
-        const widgetsStore = new WidgetsStore(rootStore);
+    test("updateWidgets should work", () => {
+        const widgetsStore = new WidgetsStore();
+        const stores = {
+            WidgetsStore: widgetsStore,
+        } as Stores;
 
-        const service = new WidgetsService([widgetsStore]);
+        const transport = new LobbyTransport("");
+
+        const widgets: Widget[] = [{
+            name: "gridWidget",
+            options: [
+                {
+                    size: "lg",
+                    title: "Large grid",
+                },
+                {
+                    size: "md",
+                    title: "Medium grid",
+                },
+                {
+                    size: "sm",
+                    title: "Small grid",
+                },
+            ],
+        }];
+
+        // eslint-disable-next-line no-new
+        new WidgetsService(transport, stores);
 
         expect(widgetsStore.widgets).toEqual([]);
 
-        await service.getWidgets();
-        expect(widgetsStore.widgets).toEqual(DB_RESPONSE);
+        transport.emit("widgets", widgets);
+
+        expect(widgetsStore.widgets).toEqual(widgets);
     });
 });

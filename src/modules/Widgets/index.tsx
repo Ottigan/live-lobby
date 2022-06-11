@@ -7,7 +7,8 @@ import { FilterWidget } from "./FilterWidget";
 import { SearchWidget } from "./SearchWidget";
 
 export const Widgets = observer(() => {
-    const { uiStore, widgetsStore } = useStore();
+    const uiStore = useStore("UiStore");
+    const widgetsStore = useStore("WidgetsStore");
 
     return (
         <WidgetsComponent>

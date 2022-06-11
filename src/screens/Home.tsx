@@ -7,7 +7,9 @@ import { Navbar } from "modules/Navbar";
 import { Widgets } from "modules/Widgets";
 
 export const Home = observer(() => {
-    const { categoriesStore, gamesStore, widgetsStore } = useStore();
+    const categoriesStore = useStore("CategoriesStore");
+    const gamesStore = useStore("GamesStore");
+    const widgetsStore = useStore("WidgetsStore");
 
     const isLoading = categoriesStore.isLoading || gamesStore.isLoading || widgetsStore.isLoading;
 

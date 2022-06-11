@@ -9,7 +9,7 @@ interface FilterWidgetProps {
 }
 
 export const FilterWidget: React.FC<FilterWidgetProps> = observer(({ options }) => {
-    const { gamesStore } = useStore();
+    const gamesStore = useStore("GamesStore");
 
     const onClick = useCallback((filter: Filter) => {
         gamesStore.filter = filter;

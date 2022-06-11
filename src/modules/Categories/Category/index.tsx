@@ -3,6 +3,7 @@ import { useStore } from "hooks/useStore";
 import { observer } from "mobx-react-lite";
 import { Game } from "modules/Categories/Category/Game";
 import { Category as CategoryComponent } from "components/Category";
+import noResultsImage from "assets/no-results.png";
 
 interface CategoryProps {
     bgColor: string;
@@ -10,7 +11,8 @@ interface CategoryProps {
 }
 
 export const Category: React.FC<CategoryProps> = observer(({ bgColor, gameIds }) => {
-    const { gamesStore, uiStore } = useStore();
+    const gamesStore = useStore("GamesStore");
+    const uiStore = useStore("UiStore");
     const containerRef = useRef<HTMLDivElement>(null);
     const games = gamesStore.getGames(gameIds);
     const { gridSize } = uiStore;
@@ -31,7 +33,9 @@ export const Category: React.FC<CategoryProps> = observer(({ bgColor, gameIds })
 
     return (
         <CategoryComponent containerRef={containerRef}>
-            {games.map((game) => <Game key={game.name} game={game} />)}
+            {games.length
+                ? games.map((game) => <Game key={game.name} game={game} />)
+                : <img src={noResultsImage} alt="Image depicting that nothing was found" />}
         </CategoryComponent>
     );
 });

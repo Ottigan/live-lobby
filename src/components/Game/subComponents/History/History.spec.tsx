@@ -18,10 +18,7 @@ describe("History", () => {
             online: false,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history: [3, 23, 22, 5, 6, 8, 0, 23, 22, 13],
         };
@@ -82,10 +79,7 @@ describe("History", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history,
         };
@@ -119,10 +113,7 @@ describe("History", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history,
         };

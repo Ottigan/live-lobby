@@ -1,25 +1,43 @@
-import { Database } from "db/Db";
-import { GamesStore } from "stores/GamesStore";
-import { BlackjackSeatIndex, Game, Store } from "types";
+import { LobbyTransport } from "transports";
+import { BlackjackSeatData, BlackjackSeatIndex, GamePlayerData, Games, Stores } from "types";
 
 export class GamesService {
-    private stores: Store[] = [];
+    private transport: LobbyTransport;
+    private stores: Stores;
 
-    public constructor(stores: Store[]) {
+    public constructor(transport: LobbyTransport, stores: Stores) {
+        this.transport = transport;
         this.stores = stores;
+
+        transport.on("games", this.updateGames);
+        transport.on("games_player_count", this.updatePlayers);
+        transport.on("games_blackjack_seats", this.updateBlackjackSeats);
     }
 
-    public async getGames(): Promise<void> {
-        const games = await Database.find("games") as Record<number, Game>;
-
-        const store = this.stores.find((s) => s instanceof GamesStore);
-
-        if (store) {
-            (store as GamesStore).games = games;
-        }
+    public getGames(): void {
+        console.log("Hi");
     }
 
-    public async takeBlackjackSeat(gameId: number, seatIndex: BlackjackSeatIndex): Promise<boolean> {
-        return Database.takeBlackjackSeat(gameId, Number(seatIndex)) as Promise<boolean>;
+    public takeBlackjackSeat(gameId: number, seatIndex: BlackjackSeatIndex): void {
+        this.transport.send("games_blackjack_seats", { gameId, seatIndex });
     }
+
+    public updateGames = (data: Games): void => {
+        const { GamesStore } = this.stores;
+
+        GamesStore.games = data;
+        GamesStore.isLoading = false;
+    };
+
+    public updatePlayers = (data: GamePlayerData[]): void => {
+        const { GamesStore } = this.stores;
+
+        GamesStore.players = data;
+    };
+
+    public updateBlackjackSeats = (data: BlackjackSeatData): void => {
+        const { GamesStore } = this.stores;
+
+        GamesStore.seats = data;
+    };
 }

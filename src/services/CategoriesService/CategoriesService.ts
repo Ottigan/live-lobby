@@ -1,21 +1,25 @@
-import { Database } from "db/Db";
-import { CategoriesStore } from "stores/CategoriesStore";
-import { Category, Store } from "types";
+import { LobbyTransport } from "transports";
+import { Category, Stores } from "types";
 
 export class CategoriesService {
-    private stores: Store[] = [];
+    private transport: LobbyTransport;
+    private stores: Stores;
 
-    public constructor(stores: Store[]) {
+    public constructor(transport: LobbyTransport, stores: Stores) {
+        this.transport = transport;
         this.stores = stores;
+
+        transport.on("categories", this.updateCategories);
     }
 
-    public async getCategories(): Promise<void> {
-        const categories = await Database.find("categories") as Category[];
-
-        const store = this.stores.find((s) => s instanceof CategoriesStore);
-
-        if (store) {
-            (store as CategoriesStore).categories = categories;
-        }
+    public getCategories(): void {
+        console.log("Hi");
     }
+
+    public updateCategories = (data: Category[]): void => {
+        const { CategoriesStore } = this.stores;
+
+        CategoriesStore.categories = data;
+        CategoriesStore.isLoading = false;
+    };
 }

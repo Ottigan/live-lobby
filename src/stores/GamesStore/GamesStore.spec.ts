@@ -2,9 +2,14 @@
  * @jest-environment node
  */
 
-import { RootStore } from "stores/RootStore";
 import { Game, GameType } from "types";
 import { GamesStore } from "./GamesStore";
+
+jest.mock("utils", () => {
+    return {
+        b64toUrl: jest.fn(() => ""),
+    };
+});
 
 describe("GamesStore", () => {
     beforeEach(() => {
@@ -16,9 +21,7 @@ describe("GamesStore", () => {
     });
 
     it("should set/get isLoading", () => {
-        const rootStore = new RootStore();
-
-        const store = new GamesStore(rootStore);
+        const store = new GamesStore();
 
         store.isLoading = false;
         expect(store.isLoading).toBe(false);
@@ -27,7 +30,6 @@ describe("GamesStore", () => {
     });
 
     it("should set/get games", () => {
-        const rootStore = new RootStore();
         const games: Record<string, Game> = {
             1: {
                 id: 1,
@@ -43,16 +45,13 @@ describe("GamesStore", () => {
                 opensAt: "",
                 description: "",
                 dealer: null,
-                language: {
-                    code: "uk",
-                    image: "",
-                },
+                language: "uk",
                 bgImage: "",
                 history: [],
             },
         };
 
-        const store = new GamesStore(rootStore);
+        const store = new GamesStore();
         expect(store.games).toEqual({});
 
         store.games = games;
@@ -60,7 +59,6 @@ describe("GamesStore", () => {
     });
 
     test("getGames should work", () => {
-        const rootStore = new RootStore();
         const idOne = 1;
         const gameOne: Game = {
             id: idOne,
@@ -76,10 +74,7 @@ describe("GamesStore", () => {
             opensAt: "",
             description: "",
             dealer: null,
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history: [],
         };
@@ -99,10 +94,7 @@ describe("GamesStore", () => {
             opensAt: "",
             description: "",
             dealer: null,
-            language: {
-                code: "de",
-                image: "",
-            },
+            language: "de",
             bgImage: "",
             seats: {
                 1: false,
@@ -120,7 +112,7 @@ describe("GamesStore", () => {
             [idFive]: gameFive,
         };
 
-        const store = new GamesStore(rootStore);
+        const store = new GamesStore();
         store.games = games;
 
         expect(store.getGames([])).toEqual([]);
@@ -129,14 +121,13 @@ describe("GamesStore", () => {
     });
 
     it("should set/get filter", () => {
-        const rootStore = new RootStore();
         const filter = {
             target: "",
             value: 1337,
             title: "leet",
         };
 
-        const store = new GamesStore(rootStore);
+        const store = new GamesStore();
 
         store.filter = null;
         expect(store.filter).toBeNull();
@@ -147,11 +138,10 @@ describe("GamesStore", () => {
     });
 
     it("should set/get search", () => {
-        const rootStore = new RootStore();
         const searchValueOne = "Abrakadabra";
         const searchValueTwo = "";
 
-        const store = new GamesStore(rootStore);
+        const store = new GamesStore();
 
         store.search = searchValueOne;
         expect(store.search).toMatch(searchValueOne);
@@ -160,7 +150,6 @@ describe("GamesStore", () => {
     });
 
     test("isFilterMatch should work", () => {
-        const rootStore = new RootStore();
         const betLimitsFilterOne = {
             target: "betLimits",
             value: 5,
@@ -182,10 +171,7 @@ describe("GamesStore", () => {
             opensAt: "",
             description: "",
             dealer: null,
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history: [],
         };
@@ -193,7 +179,7 @@ describe("GamesStore", () => {
             [gameId]: game,
         };
 
-        const store = new GamesStore(rootStore);
+        const store = new GamesStore();
 
         store.filter = betLimitsFilterOne;
         store.games = games;

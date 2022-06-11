@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom";
 import { useDebounce } from "hooks/useDebounce";
 
 export const SearchWidget = observer(() => {
-    const { gamesStore } = useStore();
     const location = useLocation();
+    const gamesStore = useStore("GamesStore");
     const [currSearch, setSearch, debouncedSearch] = useDebounce(gamesStore.search);
 
     useEffect(() => {

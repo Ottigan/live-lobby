@@ -20,15 +20,12 @@ describe("Game", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history: [3, 23, 22, 5, 6, 8, 0, 23, 22, 13],
         };
 
-        render(<Game blackjackSeatHandler={handler} gameImageDivRef={ref} game={game} />);
+        render(<Game blackjackSeatHandler={handler} gameImageDivRef={ref} game={game} players={game.players} />);
 
         expect(screen.queryByTestId("game")).toBeInTheDocument();
         expect(screen.queryByTestId("game-avatar")).toBeInTheDocument();
@@ -54,10 +51,7 @@ describe("Game", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             seats: {
                 1: false,
@@ -70,7 +64,7 @@ describe("Game", () => {
             },
         };
 
-        render(<Game blackjackSeatHandler={handler} gameImageDivRef={ref} game={game} />);
+        render(<Game blackjackSeatHandler={handler} gameImageDivRef={ref} game={game} players={game.players} />);
 
         expect(screen.queryByTestId("game")).toBeInTheDocument();
         expect(screen.queryByTestId("game-avatar")).toBeInTheDocument();
