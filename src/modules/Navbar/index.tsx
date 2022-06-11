@@ -4,7 +4,7 @@ import { useStore } from "hooks/useStore";
 import { Navbar as NavbarComponent } from "components/Navbar";
 
 export const Navbar = observer(() => {
-    const { categoriesStore: { categories } } = useStore();
+    const { categories } = useStore("CategoriesStore");
 
     return <NavbarComponent categories={categories} />;
 });

@@ -44,7 +44,7 @@ module.exports = {
         "no-await-in-loop": "off",
         "no-case-declarations": "off",
         "no-confusing-arrow": "off",
-        "no-console": ["warn", { allow: ["log", "error"] }],
+        "no-console": ["warn", { allow: ["log", "info", "error"] }],
         "no-continue": "off",
         "no-empty": ["error", { allowEmptyCatch: true }],
         "no-inner-declarations": "off", // not actual since we target only ES6

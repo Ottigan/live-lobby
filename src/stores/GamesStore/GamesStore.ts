@@ -1,17 +1,15 @@
 import { makeAutoObservable } from "mobx";
-import { Filter, Game } from "types";
-import type { RootStore } from "stores/RootStore";
+import { BlackjackSeatData, Filter, Game, GamePlayerData, Games, GameType } from "types";
+import { b64toUrl } from "utils";
 
 export class GamesStore {
     public _search = "";
     public _filter: Filter = null;
-    private _games: Record<number, Game> = {};
+    private _games: Games = {};
     private _isLoading = true;
-    private rootStore;
 
-    public constructor(rootStore: RootStore) {
+    public constructor() {
         makeAutoObservable(this);
-        this.rootStore = rootStore;
     }
 
     public set isLoading(value: boolean) {
@@ -22,12 +20,41 @@ export class GamesStore {
         return this._isLoading;
     }
 
-    public set games(games: Record<number, Game>) {
-        this._games = games;
+    public set games(games: Games) {
+        this._games = Object.values(games).reduce((acc, game) => {
+            const { id, bgImage } = game;
+
+            return {
+                ...acc,
+                [id]: {
+                    ...game,
+                    bgImage: b64toUrl(bgImage),
+                },
+            };
+        }, {});
     }
 
-    public get games(): Record<number, Game> {
+    public get games(): Games {
         return this._games;
+    }
+
+    public set players(data: GamePlayerData[]) {
+        data.forEach((x) => {
+            const { id, players } = x;
+
+            this._games[id].players = players;
+        });
+    }
+
+    public set seats(data: BlackjackSeatData) {
+        const { id, seats, players } = data;
+
+        const game = this._games[id];
+
+        if (game.type === GameType.Blackjack) {
+            game.players = players;
+            game.seats = seats;
+        }
     }
 
     public getGames(ids: number[]): Game[] {
@@ -65,7 +92,7 @@ export class GamesStore {
             case "betLimits":
                 return betLimits.min >= this.filter.value;
             case "language":
-                return language.code === this.filter.value;
+                return language === this.filter.value;
             default:
                 return true;
         }

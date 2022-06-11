@@ -7,10 +7,7 @@ describe("Footer", () => {
         const name = "Table";
         const online = true;
         const players = 13;
-        const language = {
-            code: "uk",
-            image: "",
-        };
+        const language = "uk";
 
         render(<Footer name={name} players={players} language={language} online={online} />);
 
@@ -22,10 +19,7 @@ describe("Footer", () => {
         const name = "Table";
         const online = false;
         const players = 13;
-        const language = {
-            code: "uk",
-            image: "",
-        };
+        const language = "uk";
 
         render(<Footer name={name} players={players} language={language} online={online} />);
 

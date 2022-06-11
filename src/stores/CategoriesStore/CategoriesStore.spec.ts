@@ -1,7 +1,6 @@
 /**
  * @jest-environment node
  */
-import { RootStore } from "stores/RootStore";
 import { CategoriesStore } from "./CategoriesStore";
 
 describe("CategoriesStore", () => {
@@ -14,9 +13,7 @@ describe("CategoriesStore", () => {
     });
 
     it("should set/get isLoading", () => {
-        const rootStore = new RootStore();
-
-        const store = new CategoriesStore(rootStore);
+        const store = new CategoriesStore();
 
         store.isLoading = false;
         expect(store.isLoading).toBe(false);
@@ -25,7 +22,6 @@ describe("CategoriesStore", () => {
     });
 
     it("should set/get categories", () => {
-        const rootStore = new RootStore(); // mocked from __mocks__/RootStore;
         const categories = [{
             name: "Blackjacks",
             path: "blackjack",
@@ -34,7 +30,7 @@ describe("CategoriesStore", () => {
             bgColor: "#332424",
         }];
 
-        const store = new CategoriesStore(rootStore);
+        const store = new CategoriesStore();
         expect(store.categories).toEqual([]);
 
         store.categories = categories;

@@ -1,21 +1,10 @@
 /**
  * @jest-environment node
  */
-import { RootStore } from "stores/RootStore";
 import { CategoriesStore } from "stores/CategoriesStore";
+import { Category, Stores } from "types";
+import { LobbyTransport } from "transports";
 import { CategoriesService } from "./CategoriesService";
-
-const DB_RESPONSE = "data";
-
-jest.mock("db/Db", () => {
-    return {
-        Database: {
-            find: jest.fn(() => {
-                return DB_RESPONSE;
-            }),
-        },
-    };
-});
 
 describe("CategoriesService", () => {
     beforeEach(() => {
@@ -26,15 +15,27 @@ describe("CategoriesService", () => {
         jest.clearAllMocks();
     });
 
-    test("getCategories should update CategoriesStore", async () => {
-        const rootStore = new RootStore();
-        const categoriesStore = new CategoriesStore(rootStore);
+    test("updateCategories should work", () => {
+        const categoriesStore = new CategoriesStore();
+        const stores = {
+            CategoriesStore: categoriesStore,
+        } as Stores;
 
-        const service = new CategoriesService([categoriesStore]);
+        const transport = new LobbyTransport("");
 
-        expect(categoriesStore.categories).toEqual([]);
+        const categories: Category[] = [{
+            name: "Baccarat",
+            path: "baccarat",
+            descriptor: "baccarat",
+            gameIds: [7],
+            bgColor: "#3f3050",
+        }];
 
-        await service.getCategories();
-        expect(categoriesStore.categories).toEqual(DB_RESPONSE);
+        // eslint-disable-next-line no-new
+        new CategoriesService(transport, stores);
+
+        transport.emit("categories", categories);
+
+        expect(categoriesStore.categories).toEqual(categories);
     });
 });

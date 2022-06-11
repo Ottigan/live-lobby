@@ -1,5 +1,4 @@
 /* eslint-disable no-proto */
-import { RootStore } from "stores/RootStore";
 import { UiStore } from "./UiStore";
 
 describe("UiStore", () => {
@@ -12,7 +11,6 @@ describe("UiStore", () => {
     });
 
     it("should construct with correct windowDimensions", () => {
-        const rootStore = new RootStore();
         const windowHeight = 937;
         const windowWidth = 1920;
 
@@ -24,15 +22,13 @@ describe("UiStore", () => {
         window.innerHeight = windowHeight;
         window.innerWidth = windowWidth;
 
-        const store = new UiStore(rootStore);
+        const store = new UiStore();
 
         expect(store.windowDimensions).toEqual(windowDimensions);
     });
 
     it("should update windowDimensions on resize", () => {
-        const rootStore = new RootStore();
-
-        const store = new UiStore(rootStore);
+        const store = new UiStore();
 
         const minimizedWindowHeight = 600;
         const minimizedWindowWidth = 1500;
@@ -53,35 +49,32 @@ describe("UiStore", () => {
     });
 
     it("should not assign invalid gridSize from localStorage", () => {
-        const rootStore = new RootStore();
         const invalidGridSize = "invalidGridSize";
         const getItem = jest.fn(() => invalidGridSize);
         (window.localStorage.__proto__ as Storage).getItem = getItem;
 
-        const store = new UiStore(rootStore);
+        const store = new UiStore();
 
         expect(getItem).toHaveBeenCalled();
         expect(store.gridSize).not.toMatch(invalidGridSize);
     });
 
     it("should assign valid gridSize from localStorage", () => {
-        const rootStore = new RootStore();
         const validGridSize = "lg";
         const getItem = jest.fn(() => validGridSize);
         (window.localStorage.__proto__ as Storage).getItem = getItem;
 
-        const store = new UiStore(rootStore);
+        const store = new UiStore();
 
         expect(getItem).toHaveBeenCalled();
         expect(store.gridSize).toMatch(validGridSize);
     });
 
     test("setGridSize should work", () => {
-        const rootStore = new RootStore();
         const setItem = jest.fn();
         (window.localStorage.__proto__ as Storage).setItem = setItem;
 
-        const store = new UiStore(rootStore);
+        const store = new UiStore();
 
         const lgGridSize = "lg";
         store.setGridSize(lgGridSize);

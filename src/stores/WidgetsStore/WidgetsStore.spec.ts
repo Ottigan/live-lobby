@@ -1,7 +1,6 @@
 /**
  * @jest-environment node
  */
-import { RootStore } from "stores/RootStore";
 import { Widget } from "types";
 import { WidgetsStore } from "./WidgetsStore";
 
@@ -15,9 +14,7 @@ describe("WidgetsStore", () => {
     });
 
     it("should set/get isLoading", () => {
-        const rootStore = new RootStore();
-
-        const store = new WidgetsStore(rootStore);
+        const store = new WidgetsStore();
 
         store.isLoading = false;
         expect(store.isLoading).toBe(false);
@@ -26,12 +23,11 @@ describe("WidgetsStore", () => {
     });
 
     it("should set/get widgets", () => {
-        const rootStore = new RootStore(); // mocked from __mocks__/RootStore;
         const widgets: Widget[] = [{
             name: "searchWidget",
         }];
 
-        const store = new WidgetsStore(rootStore);
+        const store = new WidgetsStore();
         expect(store.widgets).toEqual([]);
 
         store.widgets = widgets;

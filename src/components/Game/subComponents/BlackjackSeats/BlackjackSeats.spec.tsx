@@ -19,10 +19,7 @@ describe("BlackjackSeats", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             seats: {
                 1: false,
@@ -47,10 +44,7 @@ describe("BlackjackSeats", () => {
             online: false,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             seats: {
                 1: false,
@@ -75,10 +69,7 @@ describe("BlackjackSeats", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             history: [3, 23, 22, 5, 6, 8, 0, 23, 22, 13],
         };
@@ -108,10 +99,7 @@ describe("BlackjackSeats", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             seats: {
                 1: false,
@@ -149,10 +137,7 @@ describe("BlackjackSeats", () => {
             online: true,
             description: "",
             dealer: "Homer",
-            language: {
-                code: "uk",
-                image: "",
-            },
+            language: "uk",
             bgImage: "",
             seats: {
                 1: true,

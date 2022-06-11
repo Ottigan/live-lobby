@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Category } from "./Category";
 
 export const Categories = observer(() => {
-    const { categoriesStore: { categories } } = useStore();
+    const { categories } = useStore("CategoriesStore");
 
     return (
         <>

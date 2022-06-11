@@ -1,10 +1,9 @@
+import { AppStoreContext } from "index";
 import React from "react";
-import type { RootStore } from "../stores/RootStore";
+import { StoreName, Stores } from "types";
 
-export const RootStoreContext = React.createContext<RootStore | null>(null);
-
-export function useStore(): RootStore {
-    const store = React.useContext(RootStoreContext);
+export function useStore<T extends StoreName>(name: T): Stores[T] {
+    const store = React.useContext(AppStoreContext)?.stores[name];
 
     if (!store) {
         throw Error("Store was not initialized!");

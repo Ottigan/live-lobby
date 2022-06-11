@@ -1,15 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import { Category } from "types";
-import type { RootStore } from "stores/RootStore";
 
 export class CategoriesStore {
     private _isLoading = true;
     private _categories: Category[] = [];
-    private rootStore;
 
-    public constructor(rootStore: RootStore) {
+    public constructor() {
         makeAutoObservable(this);
-        this.rootStore = rootStore;
     }
 
     public set isLoading(value: boolean) {

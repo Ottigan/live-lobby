@@ -3,6 +3,7 @@
 
 .widgets {
   position: absolute;
+  z-index: 1;
   top: variables.$header-height;
   height: variables.$widgets-height;
   width: 100%;

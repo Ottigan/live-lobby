@@ -1,7 +1,16 @@
 import React from "react";
 import cn from "classnames";
-import { GridWidgetOption } from "types";
+import { GridSize, GridWidgetOption } from "types";
+import smallGrid from "assets/small-grid.svg";
+import mediumGrid from "assets/medium-grid.svg";
+import largeGrid from "assets/large-grid.svg";
 import styles from "./styles.module.scss";
+
+const gridImages: Record<GridSize, string> = {
+    sm: smallGrid,
+    md: mediumGrid,
+    lg: largeGrid,
+};
 
 interface GridWidgetProps {
     handler: (e: React.MouseEvent) => void;
@@ -15,9 +24,11 @@ export const GridWidget: React.FC<GridWidgetProps> = (props) => {
     return (
         <span className={styles.gridWidget} data-testid="grid-widget">
             {options.map((option) => {
-                const { title, size, image: Svg } = option;
+                const { title, size } = option;
                 const stringSize = String(size);
                 const active = activeGrid === stringSize;
+
+                const Svg = gridImages[size];
 
                 return (
                     <button

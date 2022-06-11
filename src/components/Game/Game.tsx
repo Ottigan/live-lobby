@@ -13,11 +13,12 @@ interface GameProps {
     blackjackSeatHandler: (id: number, index: BlackjackSeatIndex) => void;
     gameImageDivRef: React.RefObject<HTMLDivElement>;
     game: TypeGame;
+    players: number;
 }
 
 export const Game: React.FC<GameProps> = (props) => {
-    const { blackjackSeatHandler, gameImageDivRef, game } = props;
-    const { name, betLimits, players, online, dealer, language, opensAt } = game;
+    const { blackjackSeatHandler, gameImageDivRef, game, players } = props;
+    const { name, betLimits, online, dealer, language, opensAt } = game;
 
     return (
         <div className={cn(styles.game, { [styles.offline]: !online })} data-testid="game">

@@ -1,14 +1,42 @@
-import type { CategoriesStore } from "stores/CategoriesStore";
-import type { GamesStore } from "stores/GamesStore";
-import type { UiStore } from "stores/UiStore";
-import type { WidgetsStore } from "stores/WidgetsStore";
+import { CategoriesService, GamesService, WidgetsService } from "services";
+import { CategoriesStore, GamesStore, WidgetsStore } from "stores";
+import { UiStore } from "stores/UiStore";
 
 export enum Env {
     Production = "production",
     Development = "development",
 }
 
-export type Store = CategoriesStore | GamesStore | UiStore | WidgetsStore;
+export interface Stores {
+    "CategoriesStore": CategoriesStore;
+    "GamesStore": GamesStore;
+    "UiStore": UiStore;
+    "WidgetsStore": WidgetsStore;
+}
+export type StoreName = keyof Stores;
+export type Store = Stores[StoreName];
+export type StoreConstructor = typeof CategoriesStore | typeof GamesStore | typeof UiStore | typeof WidgetsStore;
+export type StoreConstructors = Record<StoreName, StoreConstructor>;
+
+export interface Services {
+    "CategoriesService": CategoriesService;
+    "GamesService": GamesService;
+    "WidgetsService": WidgetsService;
+}
+export type ServiceName = keyof Services;
+export type Service = Services[ServiceName];
+export type ServiceConstructor = typeof CategoriesService | typeof GamesService | typeof WidgetsService;
+export type ServiceConstructors = Record<ServiceName, ServiceConstructor>;
+
+export interface AppContext {
+    stores: Stores;
+    services: Services;
+}
+
+export interface TransportResponse {
+    status: string;
+    data: string;
+}
 
 export type OmitMethodNames<T> = NonNullable<
   {
@@ -16,6 +44,18 @@ export type OmitMethodNames<T> = NonNullable<
       [K in keyof T]: T[K] extends Function ? never : K;
   }[keyof T]
 >;
+
+export interface Category {
+    name: string;
+    path: string;
+    descriptor: string;
+    gameIds: number[];
+    bgColor: string;
+}
+
+/**
+ * Games
+ */
 
 export enum GameType {
     Baccarat = "baccarat",
@@ -36,10 +76,7 @@ export interface BaseGame {
     opensAt?: string;
     description: string;
     dealer: string | null;
-    language: {
-        code: string;
-        image: string;
-    };
+    language: string;
     bgImage: string;
 }
 
@@ -66,21 +103,19 @@ export interface RouletteGame extends BaseGame {
 export type RouletteResultValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36;
 
 export type Game = BaccaratGame | BlackjackGame | RouletteGame;
+export type Games = Record<number, Game>;
 
-export interface Category {
-    name: string;
-    path: string;
-    descriptor: string;
-    gameIds: number[];
-    bgColor: string;
-}
+export type GamePlayerData = Pick<Game, "id" | "players">;
+export type BlackjackSeatData = Pick<BlackjackGame, "id" | "players" | "seats">;
 
 export type GridSize = "lg" | "md" | "sm";
 
+/**
+ * Widgets
+*/
 export interface GridWidgetOption {
     size: GridSize;
     title: string;
-    image: string;
 }
 
 export interface GridWidget {

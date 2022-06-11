@@ -9,7 +9,7 @@ interface GridWidgetProps {
 }
 
 export const GridWidget: React.FC<GridWidgetProps> = observer(({ options }) => {
-    const { uiStore } = useStore();
+    const uiStore = useStore("UiStore");
 
     const onClick = useCallback((e: React.MouseEvent) => {
         const value = (e.target as HTMLButtonElement).value as GridSize;

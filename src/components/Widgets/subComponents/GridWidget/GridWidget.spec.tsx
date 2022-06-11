@@ -2,14 +2,12 @@
 import React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { GridWidgetOption } from "types";
-import mediumGrid from "assets/medium-grid.svg";
 import { GridWidget } from "./GridWidget";
 
 function createOption(title: string): GridWidgetOption {
     return {
         title,
         size: "md",
-        image: mediumGrid,
     };
 }
 

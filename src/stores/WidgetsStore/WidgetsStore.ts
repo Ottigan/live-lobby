@@ -1,16 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import { Widget } from "types";
-import type { RootStore } from "stores/RootStore";
 
 export class WidgetsStore {
     public _isLoading = true;
     protected _widgets: Widget[] = [];
 
-    private rootStore;
-
-    public constructor(rootStore: RootStore) {
+    public constructor() {
         makeAutoObservable(this);
-        this.rootStore = rootStore;
     }
 
     public set isLoading(value: boolean) {
