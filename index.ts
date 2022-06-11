@@ -1,16 +1,10 @@
 import http from "http";
-import WebSocket from "ws";
+import {Server } from "ws";
 import { Database } from "./db/Db";
 
 const server = http.createServer();
 
-const wss = new WebSocket.Server({ noServer: true });
-
-server.on("upgrade", (request, socket, head) => {
-    wss.handleUpgrade(request, socket, head, (ws) => {
-        wss.emit("connection", ws, request);
-    });
-});
+const wss = new Server({ server });
 
 wss.on("connection", (ws, request) => {
     const { url } = request;
