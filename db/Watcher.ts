@@ -1,5 +1,5 @@
-import WebSocket from "ws";
-import EventEmitter from "events";
+import WebSocket from 'ws';
+import EventEmitter from 'events';
 
 interface Request {
     type: string;
@@ -11,65 +11,66 @@ interface ExtendedWebSocket extends WebSocket {
     isAlive: boolean;
 }
 
-export class Watcher extends EventEmitter {
-    protected clients: Record<number, ExtendedWebSocket> = {};
-    private specialId = 1;
+export default class Watcher extends EventEmitter {
+  protected clients: Record<number, ExtendedWebSocket> = {};
 
-    protected constructor() {
-        super();
-        this.clients = {};
+  private specialId = 1;
 
-        setInterval(() => this.validateClients(), 5000);
-        this.validateClients = this.validateClients.bind(this);
-    }
+  protected constructor() {
+    super();
+    this.clients = {};
 
-    protected appendClient(client: WebSocket): void {
-        const extendedClient = client as ExtendedWebSocket;
-        extendedClient.id = this.getValidClientId();
-        extendedClient.isAlive = true;
-        extendedClient.onmessage = this.onmessage;
-        extendedClient.onclose = () => extendedClient.terminate();
+    setInterval(() => this.validateClients(), 5000);
+    this.validateClients = this.validateClients.bind(this);
+  }
 
-        // eslint-disable-next-line func-names
-        extendedClient.on("pong", function () {
-            (this as ExtendedWebSocket).isAlive = true;
-        });
+  protected appendClient(client: WebSocket): void {
+    const extendedClient = client as ExtendedWebSocket;
+    extendedClient.id = this.getValidClientId();
+    extendedClient.isAlive = true;
+    extendedClient.onmessage = this.onmessage;
+    extendedClient.onclose = () => extendedClient.terminate();
 
-        this.clients[extendedClient.id] = extendedClient;
-    }
+    // eslint-disable-next-line func-names
+    extendedClient.on('pong', function () {
+      (this as ExtendedWebSocket).isAlive = true;
+    });
 
-    protected sendToAll<T>(data: T): void {
-        const strData = JSON.stringify(data);
+    this.clients[extendedClient.id] = extendedClient;
+  }
 
-        Object.values(this.clients).forEach((client) => {
-            client.send(strData);
-        });
-    }
+  protected sendToAll<T>(data: T): void {
+    const strData = JSON.stringify(data);
 
-    private onmessage = (event: WebSocket.MessageEvent): void => {
-        const { type, data } = JSON.parse(event.data as string) as Request;
+    Object.values(this.clients).forEach((client) => {
+      client.send(strData);
+    });
+  }
 
-        this.emit(type, data);
-    };
+  private onmessage = (event: WebSocket.MessageEvent): void => {
+    const { type, data } = JSON.parse(event.data as string) as Request;
 
-    private getValidClientId() {
-        const id = this.specialId;
-        this.specialId++;
+    this.emit(type, data);
+  };
 
-        return id;
-    }
+  private getValidClientId() {
+    const id = this.specialId;
+    this.specialId++;
 
-    private validateClients() {
-        Object.keys(this.clients).forEach((clientId: string): void => {
-            const client = this.clients[Number(clientId)];
+    return id;
+  }
 
-            if (!client.isAlive) {
-                client.terminate();
-                delete this.clients[Number(clientId)];
-            } else {
-                client.isAlive = false;
-                client.ping();
-            }
-        });
-    }
+  private validateClients() {
+    Object.keys(this.clients).forEach((clientId: string): void => {
+      const client = this.clients[Number(clientId)];
+
+      if (!client.isAlive) {
+        client.terminate();
+        delete this.clients[Number(clientId)];
+      } else {
+        client.isAlive = false;
+        client.ping();
+      }
+    });
+  }
 }
