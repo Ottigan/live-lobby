@@ -10,10 +10,13 @@ export class CategoriesService {
         this.stores = stores;
 
         transport.on("categories", this.updateCategories);
+        this.getCategories().catch((err) => console.error(err));
     }
 
-    public getCategories(): void {
-        console.log("Hi");
+    public async getCategories(): Promise<void> {
+        const categories = await this.transport.fetchCategories();
+
+        this.updateCategories(categories);
     }
 
     public updateCategories = (data: Category[]): void => {

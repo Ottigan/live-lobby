@@ -16,7 +16,7 @@ const stores = (Object.keys(globalStores)).reduce((acc, key) => {
     };
 }, {} as Stores);
 
-const transport = new LobbyTransport("wss://live-lobby.herokuapp.com/live-lobby");
+const transport = new LobbyTransport(process.env.WEBSOCKET);
 
 const services = Object.keys(globalServices).reduce((acc, key) => {
     const name = key as ServiceName;

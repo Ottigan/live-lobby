@@ -10,10 +10,13 @@ export class WidgetsService {
         this.stores = stores;
 
         transport.on("widgets", this.updateWidgets);
+        this.getWidgets().catch((err) => console.error(err));
     }
 
-    public getWidgets(): void {
-        console.log("Hi");
+    public async getWidgets(): Promise<void> {
+        const widgets = await this.transport.fetchWidgets();
+
+        this.updateWidgets(widgets);
     }
 
     public updateWidgets = (data: Widget[]): void => {

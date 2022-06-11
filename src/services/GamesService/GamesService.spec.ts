@@ -21,6 +21,45 @@ describe("GamesService", () => {
         jest.clearAllMocks();
     });
 
+    test("getGames should work", async () => {
+        const gamesStore = new GamesStore();
+        const stores = {
+            GamesStore: gamesStore,
+        } as Stores;
+
+        const games: Games = {
+            1: {
+                id: 1,
+                name: "Testerino Halapenjo",
+                type: GameType.Roulette,
+                players: 54,
+                betLimits: {
+                    currency: "€",
+                    min: 3,
+                    max: 20,
+                },
+                online: false,
+                opensAt: "",
+                description: "",
+                dealer: null,
+                language: "uk",
+                bgImage: "",
+                history: [],
+            },
+        };
+
+        const transport = new LobbyTransport("");
+        jest.spyOn(transport, "fetchGames").mockImplementation(() => Promise.reject(Error("Error")));
+
+        const service = new GamesService(transport, stores);
+        const spy = jest.spyOn(service, "updateGames");
+
+        jest.spyOn(transport, "fetchGames").mockImplementation(() => Promise.resolve(games));
+        await service.getGames();
+
+        expect(spy).toBeCalledWith(games);
+    });
+
     test("takeBlackjackSeat should work", () => {
         const transport = new LobbyTransport("");
         const spy = jest.spyOn(transport, "send");
@@ -146,6 +185,7 @@ describe("GamesService", () => {
     test("updateBlackjackSeats should work", () => {
         const idOne = 1;
         const idFour = 4;
+
         const games: Games = {
             [idOne]: {
                 id: idOne,
@@ -191,6 +231,7 @@ describe("GamesService", () => {
                 },
             },
         };
+
         const gamesStore = new GamesStore();
         gamesStore.games = games;
         const stores = {

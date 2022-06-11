@@ -12,10 +12,13 @@ export class GamesService {
         transport.on("games", this.updateGames);
         transport.on("games_player_count", this.updatePlayers);
         transport.on("games_blackjack_seats", this.updateBlackjackSeats);
+        this.getGames().catch((err) => console.error(err));
     }
 
-    public getGames(): void {
-        console.log("Hi");
+    public async getGames(): Promise<void> {
+        const games = await this.transport.fetchGames();
+
+        this.updateGames(games);
     }
 
     public takeBlackjackSeat(gameId: number, seatIndex: BlackjackSeatIndex): void {

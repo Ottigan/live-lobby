@@ -6,6 +6,8 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             NODE_ENV: Env;
+            SERVER: string;
+            WEBSOCKET: string;
         }
     }
 }

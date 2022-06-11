@@ -3,8 +3,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
-module.exports = () => {
+module.exports = (env = {}) => {
     const isProduction = process.env.NODE_ENV === "production";
 
     const stylesHandler = isProduction
@@ -23,11 +24,19 @@ module.exports = () => {
             hot: true,
             historyApiFallback: true,
             host: "localhost",
+            proxy: {
+                "/api": "http://localhost:5000",
+            },
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: "./src/index.html",
                 filename: "index.html",
+            }),
+            new Dotenv({
+                path: isProduction || env.USE_HEROKU // Allow access to remote server
+                    ? "./.env"
+                    : "./.env.development",
             }),
             // Add your plugins here
             // Learn more about plugins from https://webpack.js.org/configuration/plugins/

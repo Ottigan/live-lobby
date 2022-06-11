@@ -32,14 +32,11 @@ export function getRandomMomentInNext24h(): string {
 }
 
 export function b64toUrl(data: string): string {
-    const byteCharacters = window.atob(data);
+    const byteString = window.atob(data);
+    const charCodeArr = byteString.split("").map((char) => char.charCodeAt(0));
+    const blobPart = new Uint8Array(charCodeArr).buffer;
+    const jpgBlob = new Blob([blobPart], { type: "image/jpg" });
+    const url = window.URL.createObjectURL(jpgBlob);
 
-    const ab = new ArrayBuffer(byteCharacters.length);
-    const ia = new Uint8Array(ab);
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-        ia[i] = byteCharacters.charCodeAt(i);
-    }
-
-    return window.URL.createObjectURL(new Blob([ab], { type: "image/jpeg" }));
+    return url;
 }

@@ -1,4 +1,4 @@
-import { TransportResponse } from "types";
+import { Category, Games, TransportResponse, Widget } from "types";
 import EventEmitter from "events";
 
 export class LobbyTransport extends EventEmitter {
@@ -35,6 +35,39 @@ export class LobbyTransport extends EventEmitter {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(strData);
         }
+    }
+
+    public async fetchCategories(): Promise<Category[]> {
+        return fetch(`${process.env.SERVER}/categories`)
+            .then((res) => res.json())
+            .then((categories: Category[]) => categories)
+            .catch((err) => {
+                console.error(err);
+
+                return [];
+            });
+    }
+
+    public async fetchGames(): Promise<Games> {
+        return fetch(`${process.env.SERVER}/games`)
+            .then((res) => res.json())
+            .then((games: Games) => games)
+            .catch((err) => {
+                console.error(err);
+
+                return {};
+            });
+    }
+
+    public async fetchWidgets(): Promise<Widget[]> {
+        return fetch(`${process.env.SERVER}/widgets`)
+            .then((res) => res.json())
+            .then((widgets: Widget[]) => widgets)
+            .catch((err) => {
+                console.error(err);
+
+                return [];
+            });
     }
 
     private onmessage = (res: MessageEvent<string>) => {

@@ -1,4 +1,4 @@
-import { getDateDiff, getRandomMomentInNext24h } from "utils";
+import { b64toUrl, getDateDiff, getRandomMomentInNext24h } from "utils";
 
 describe("Utils", () => {
     beforeEach(() => {
@@ -38,5 +38,20 @@ describe("Utils", () => {
         jest.spyOn(Math, "random").mockReturnValue(1);
         const nowPlus24h = getRandomMomentInNext24h();
         expect(nowPlus24h).toMatch(now.toISOString());
+    });
+
+    test("b64toUrl should work", () => {
+        const sampleString = "Hello World";
+        const base64string = Buffer.from(sampleString, "base64").toString("base64");
+
+        const expectedValue = "I am a URL... trust me!";
+        Object.defineProperty(URL, "createObjectURL", {
+            writable: true,
+            value: jest.fn(() => expectedValue),
+        });
+
+        const url = b64toUrl(base64string);
+
+        expect(url).toMatch(expectedValue);
     });
 });
